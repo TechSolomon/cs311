@@ -14,9 +14,9 @@
 
 // Includes for the "doctest" unit-testing framework
 #define DOCTEST_CONFIG_IMPLEMENT
-                             // We write our own main
+// We write our own main
 #define DOCTEST_CONFIG_SUPER_FAST_ASSERTS
-                             // Reduce compile time
+// Reduce compile time
 #include "doctest.h"         // For doctest
 
 // Includes for all test programs
@@ -43,8 +43,8 @@ using std::vector;
 
 // Printable name for this test suite
 const string test_suite_name =
-    "class Delivery"
-    " - CS 311 Proj 1, Ex A";
+        "class Delivery"
+        " - CS 311 Proj 1, Ex A";
 
 
 // *********************************************************************
@@ -565,8 +565,8 @@ TEST_CASE( "String conversions" )
     Delivery t2("xyz", 100, 5);
     Delivery t3("", 0, 11);
     vector<string> mostrs {
-        "DUMMY", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+            "DUMMY", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     };
 
     SUBCASE( "Delivery::toString" )
@@ -774,7 +774,7 @@ TEST_CASE( "Large values" )
     ostringstream ostr;
     ostr << bigname << " (" << bigquantity << "), Dec";
     string bigstringform = ostr.str();
-                        // String form of Delivery(bigname, bigquantity)
+    // String form of Delivery(bigname, bigquantity)
 
     SUBCASE( "Construction from large values" )
     {
@@ -915,13 +915,13 @@ int main(int argc,
          char *argv[])
 {
     doctest::Context dtcontext;
-                             // Primary doctest object
+    // Primary doctest object
     int dtresult;            // doctest return code; for return by main
 
     // Handle command line
     dtcontext.applyCommandLine(argc, argv);
     dtresult = 0;            // doctest flags no command-line errors
-                             //  (strange but true)
+    //  (strange but true)
 
     if (!dtresult)           // Continue only if no command-line error
     {
