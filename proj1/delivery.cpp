@@ -122,7 +122,7 @@ Delivery Delivery::operator--([[maybe_unused]] int dummy) {
     return save;
 }
 
-// operator << (ostream, Delivery)
+// operator << (std::ostream, Delivery)
 std::ostream & operator<<(std::ostream & str, const Delivery & obj) {
     assert(obj.getMonth() <= 12 && obj.getMonth() >= 1 && obj.getQuantity() >= 0);
 

@@ -12,13 +12,16 @@
 
 class IntArray {
 public:
-    using size_type = std::size_t;
-    using value_type = int;
+    using size_type = std::size_t; // Unsigned type for size of array...
 
+    using value_type = int; // Type of item in this container
+
+    // Ctor from size
     explicit IntArray(size_type size) :_theArray(new value_type[size]){
         _theArray = new value_type[size];
     }
 
+    // Dctor
     ~IntArray() {
         delete [] _theArray;
     }
