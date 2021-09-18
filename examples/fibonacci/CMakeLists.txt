@@ -3,4 +3,4 @@ project(fibonacci)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(fibonacci fibo_first.cpp)
+add_executable(fibonacci fibo_formula.cpp)
