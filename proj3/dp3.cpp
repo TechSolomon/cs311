@@ -1,4 +1,5 @@
-// dp3.cpp  SKELETON
+// dp3.cpp
+// Solomon Himelbloom
 // Glenn G. Chappell
 // 2021-09-16
 //
@@ -10,18 +11,28 @@
 #include <functional>
 using std::function;
 
-
-void didItThrow(const function<void()> & ff,
-                bool & threw)
-{
-    // TODO: WRITE THIS!!!
+void didItThrow(const function<void()> & ff, bool & threw) {
+    try {
+        ff();
+        threw = false;
+    }
+    catch (...) {
+        threw = true;
+        throw;
+    }
 }
 
+// greatest common divisor (GCD)
+int gcd(int a, int b) {
+    // BASE CASE
+    if (a > b) {
+        return gcd(b, a);
+    }
 
-int gcd(int a,
-        int b)
-{
-    return 42;  // Dummy return
-    // TODO: WRITE THIS!!!
+    else if (a == 0) {
+        return b;
+    }
+
+    // RECURSIVE CASE
+    return gcd(b % a, a);
 }
-
