@@ -14,8 +14,10 @@ using std::function;
 // didItThrow
 // Pre: None.
 // Requirements on Types:
-// - function pointer
+// - function pointer & threw as bool
 // - [OR] an object which has operator() defined
+// Invariants: None.
+// Exceptions: Catch All & Re-Throw.
 void didItThrow(const function<void()> & ff, bool & threw) {
     try {
         ff();
@@ -33,6 +35,7 @@ void didItThrow(const function<void()> & ff, bool & threw) {
 // - a || b == 0 (not both)
 // Requirements on Types:
 // - gcd is the value of type int.
+// Exceptions: None.
 int gcd(int a, int b) {
     // BASE CASE
     if (a > b) {
@@ -44,5 +47,6 @@ int gcd(int a, int b) {
     }
 
     // RECURSIVE CASE
+    // Invariant: a && b >= 0
     return gcd(b % a, a);
 }

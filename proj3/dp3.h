@@ -21,6 +21,8 @@
 // - [OR] ptr to nullptr-terminated Linked List.
 // Requirements on Types:
 // - copy ctor & (non-throwing) dctor.
+// Invariants: None.
+// Exceptions: throws `out_of_range` when exceeding LLNode size.
 template <typename ValueType>
 ValueType lookup(const LLNode<ValueType> * head, std::size_t index) {
     const LLNode<ValueType> * pointer = head; // Iterates through the list
@@ -48,6 +50,8 @@ void didItThrow(const std::function<void()> & ff, bool & threw);
 // - Returns number of unique values in the given range.
 // Requirements on Types:
 // - RAIter is a random-access iterator type.
+// Invariants: None.
+// Exceptions: None.
 template <typename RAIter>
 std::size_t uniqueCount(RAIter first, RAIter last) {
     assert(std::distance(first, last) >= 0);
