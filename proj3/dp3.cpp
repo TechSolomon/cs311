@@ -11,18 +11,28 @@
 #include <functional>
 using std::function;
 
+// didItThrow
+// Pre: None.
+// Requirements on Types:
+// - function pointer
+// - [OR] an object which has operator() defined
 void didItThrow(const function<void()> & ff, bool & threw) {
     try {
         ff();
         threw = false;
-    }
-    catch (...) {
+    } catch (...) {
         threw = true;
         throw;
     }
 }
 
-// greatest common divisor (GCD)
+// gcd (greatest common divisor)
+// - The greatest integer that divides evenly.
+// Pre:
+// - a && b >= 0
+// - a || b == 0 (not both)
+// Requirements on Types:
+// - gcd is the value of type int.
 int gcd(int a, int b) {
     // BASE CASE
     if (a > b) {
