@@ -3,4 +3,4 @@ project(proj5)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(proj5 fsarray.cpp fsarray_main.cpp fstarray_test.cpp)
+add_executable(proj5 fstarray_test.cpp)
