@@ -3,4 +3,4 @@ project(sort)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(sort insertion_sort.cpp)
+add_executable(sort quicksort2.cpp)
