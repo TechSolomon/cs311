@@ -1,5 +1,6 @@
 // fstarray.h
 // Solomon Himelbloom
+// Benjamin Stream
 // 2021-10-21
 // Class template for Project 5 (Frightfully Smart Templated Array Class).
 
@@ -17,6 +18,7 @@
 // *********************************************************************
 
 
+// FIXME:
 // class FSTArray
 // Frightfully Smart Array of int.
 // Resizable, copyable/movable, exception-safe.
@@ -69,7 +71,7 @@ public:
     FSTArray(FSTArray && other) noexcept;
 
     // Copy assignment operator
-    // ??? Guarantee
+    // TODO: ??? Guarantee
     FSTArray & operator=(const FSTArray & other);
 
     // Move assignment operator
@@ -88,7 +90,7 @@ public:
 
     // operator[] - non-const & const
     // Pre:
-    //     ???
+    // TODO:    ???
     // No-Throw Guarantee
     value_type & operator[](size_type index)
     {
@@ -139,27 +141,27 @@ public:
     }
 
     // resize
-    // ??? Guarantee
+    // TODO: ??? Guarantee
     void resize(size_type newsize);
 
     // insert
-    // ??? Guarantee
+    // TODO: ??? Guarantee
     iterator insert(iterator pos,
                     const value_type & item);
 
     // erase
-    // ??? Guarantee
+    // TODO: ??? Guarantee
     iterator erase(iterator pos);
 
     // push_back
-    // ??? Guarantee
+    // TODO: ??? Guarantee
     void push_back(const value_type & item)
     {
         insert(end(), item);
     }
 
     // pop_back
-    // ??? Guarantee
+    // TODO: ??? Guarantee
     void pop_back()
     {
         erase(end()-1);
@@ -201,9 +203,9 @@ FSTArray<F>::FSTArray(const FSTArray<F> & other)
         delete [] _data;
         throw;
     }
-    // The above call to std::copy does not throw, since it copies int
-    // values. But if value_type is changed, then the call may throw, in
-    // which case this copy ctor may need to be rewritten.
+    // FIXME: The above call to std::copy does not throw, since it copies int
+    //  values. But if value_type is changed, then the call may throw, in
+    //  which case this copy ctor may need to be rewritten.
 }
 
 
