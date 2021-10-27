@@ -249,16 +249,26 @@ template <typename F>
 void FSTArray<F>::resize(FSTArray<F>::size_type newsize)
 {
     // if newsize =< capacity set _size to newsize 
-    if (newsize =< _capacity) {
+    if (newsize <= _capacity) {
         _size = newsize;
     }
     //newSize = newsize, newData using std:copy (cleanup) newCapacity = 2 * capacity, if not allowed then set to newSize.
     else
     {
-        FSTArray<F> dummy(_capacity * 2);
-        // else FSTArray<F> dummy(newsize?);
-        std::copy(this->begin(), this->end(), dummy.begin())
-            // throw checking?
+        // if FSTArray<F> dummy(capacity*2); //?
+        FSTArray<F> dummy(newsize); // Dummy Object
+        // else FSTArray<F> dummy(newsize); //?
+        
+        try {
+            std::copy(this->begin(), this->end(), dummy.begin());
+        }
+        catch (...) {
+            delete[] _data;
+            throw;
+        }
+
+        // after data is copied into dummy function, swap dummy obj with current obj
+        swap(dummy);
     }
 
 
