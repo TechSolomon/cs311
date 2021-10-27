@@ -10,7 +10,7 @@
 #include <cstddef>
 // For std::size_t
 #include <algorithm>
-// For std::max
+// For std::max, std::swap, std::rotate
 #include <utility>
 
 // *********************************************************************
@@ -281,8 +281,9 @@ typename FSTArray<F>::iterator FSTArray<F>::insert(FSTArray<F>::iterator pos,
 template <typename F>
 typename FSTArray<F>::iterator FSTArray<F>::erase(FSTArray<F>::iterator pos)
 {
-    // TODO: WRITE THIS!!!
-    return begin();  // DUMMY
+    std::rotate(pos, pos + 1, end());
+//    resize(_size - 1);
+    return begin();
 }
 
 
