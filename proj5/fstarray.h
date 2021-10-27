@@ -10,8 +10,7 @@
 #include <cstddef>
 // For std::size_t
 #include <algorithm>
-// For std::max, std::swap, std::rotate
-#include <utility>
+// For std::max, std::copy, std::rotate, std::swap
 
 // *********************************************************************
 // class FSTArray - Class definition
@@ -164,7 +163,7 @@ public:
     // TODO: ??? Guarantee
     void pop_back()
     {
-        erase(end()-1);
+        erase(end() - 1);
     }
 
     // swap
@@ -217,9 +216,7 @@ FSTArray<F>::FSTArray(FSTArray<F> && other) noexcept
          _size(other._size),
          _data(other._data)
 {
-    other._capacity = 0;
-    other._size = 0;
-    other._data = nullptr;
+    swap(other);
 }
 
 
@@ -228,8 +225,9 @@ FSTArray<F>::FSTArray(FSTArray<F> && other) noexcept
 template <typename F>
 FSTArray<F> & FSTArray<F>::operator=(const FSTArray<F> & other)
 {
-    // TODO: WRITE THIS!!!
-    return *this; // DUMMY
+    FSTArray<F> duplicate(other);
+    swap(duplicate);
+    return *this;
 }
 
 
@@ -238,8 +236,8 @@ FSTArray<F> & FSTArray<F>::operator=(const FSTArray<F> & other)
 template <typename F>
 FSTArray<F> & FSTArray<F>::operator=(FSTArray<F> && other) noexcept
 {
-    // TODO: WRITE THIS!!!
-    return *this; // DUMMY
+    swap(other);
+    return *this;
 }
 
 
@@ -248,16 +246,18 @@ FSTArray<F> & FSTArray<F>::operator=(FSTArray<F> && other) noexcept
 template <typename F>
 void FSTArray<F>::resize(FSTArray<F>::size_type newsize)
 {
-    // if newsize =< capacity set _size to newsize 
+    // if newsize <= capacity set _size to newsize
     if (newsize <= _capacity) {
         _size = newsize;
     }
-    //newSize = newsize, newData using std:copy (cleanup) newCapacity = 2 * capacity, if not allowed then set to newSize.
+    // newSize = newsize,
+    // newData using std:copy (cleanup) newCapacity = 2 * capacity,
+    // if not allowed then set to newSize.
     else
     {
-        // if FSTArray<F> dummy(capacity*2); //?
+        // if FSTArray<F> dummy(capacity*2); // FIXME
         FSTArray<F> dummy(newsize); // Dummy Object
-        // else FSTArray<F> dummy(newsize); //?
+        // else FSTArray<F> dummy(newsize); // FIXME
         
         try {
             std::copy(this->begin(), this->end(), dummy.begin());
@@ -281,8 +281,12 @@ template <typename F>
 typename FSTArray<F>::iterator FSTArray<F>::insert(FSTArray<F>::iterator pos,
                                                    const FSTArray<F>::value_type & item)
 {
-    // TODO: WRITE THIS!!!
-    return begin();  // DUMMY
+    if (pos == end()) {
+        return -1;
+    } else {
+        std::rotate(pos, end() - 1, end());
+    }
+    return begin();
 }
 
 
@@ -292,7 +296,7 @@ template <typename F>
 typename FSTArray<F>::iterator FSTArray<F>::erase(FSTArray<F>::iterator pos)
 {
     std::rotate(pos, pos + 1, end());
-//    resize(_size - 1);
+    resize(_size - 1);
     return begin();
 }
 
