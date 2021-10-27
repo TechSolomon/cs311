@@ -11,7 +11,7 @@
 // For std::size_t
 #include <algorithm>
 // For std::max
-
+#include <utility>
 
 // *********************************************************************
 // class FSTArray - Class definition
@@ -248,7 +248,20 @@ FSTArray<F> & FSTArray<F>::operator=(FSTArray<F> && other) noexcept
 template <typename F>
 void FSTArray<F>::resize(FSTArray<F>::size_type newsize)
 {
-    // TODO: WRITE THIS!!!
+    // if newsize =< capacity set _size to newsize 
+    if (newsize =< _capacity) {
+        _size = newsize;
+    }
+    //newSize = newsize, newData using std:copy (cleanup) newCapacity = 2 * capacity, if not allowed then set to newSize.
+    else
+    {
+        FSTArray<F> dummy(_capacity * 2);
+        // else FSTArray<F> dummy(newsize?);
+        std::copy(this->begin(), this->end(), dummy.begin())
+            // throw checking?
+    }
+
+
 }
 
 
@@ -278,7 +291,9 @@ typename FSTArray<F>::iterator FSTArray<F>::erase(FSTArray<F>::iterator pos)
 template <typename F>
 void FSTArray<F>::swap(FSTArray<F> & other) noexcept
 {
-    // TODO: WRITE THIS!!!
+    std::swap(_size, other._size);
+    std::swap(_capacity, other._capacity);
+    std::swap(_data, other._data);
 }
 
 // End class FSTArray
