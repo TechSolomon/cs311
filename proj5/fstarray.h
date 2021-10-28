@@ -264,7 +264,7 @@ void FSTArray<F>::resize(FSTArray<F>::size_type newsize)
             try {
                 dummy._capacity = size_type(2 * this->_capacity);
             }
-            catch (...) {
+            catch (const std::bad_alloc) {
                 delete[]  dummy._data;
                 dummy._capacity = newsize;
                 throw;
@@ -280,7 +280,8 @@ void FSTArray<F>::resize(FSTArray<F>::size_type newsize)
         }
 
         // after data is copied into dummy function, swap dummy obj with current obj
-        swap(dummy);
+        this->swap(dummy);
+        //Dummy should deconstruct after going out of scope....
     }
 
 
