@@ -257,14 +257,25 @@ void FSTArray<F>::resize(FSTArray<F>::size_type newsize)
     else
     {
         // if FSTArray<F> dummy(capacity*2); //?
-        FSTArray<F> dummy(newsize); // Dummy Object
         // else FSTArray<F> dummy(newsize); //?
-        
+        FSTArray<F> dummy(newsize);// Dummy Object to hold data with _size set to newsize;
+
+           // Not sure if this is right, I cant think of another way to handle a badalloc from allocating new memory. 
+            try {
+                dummy._capacity = size_type(2 * this->_capacity);
+            }
+            catch (...) {
+                delete[]  dummy._data;
+                dummy._capacity = newsize;
+                throw;
+            }
+
+        //copies Data over from current object
         try {
             std::copy(this->begin(), this->end(), dummy.begin());
         }
         catch (...) {
-            delete[] _data;
+          delete[]  dummy._data;
             throw;
         }
 
