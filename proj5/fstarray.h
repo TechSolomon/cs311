@@ -163,7 +163,7 @@ public:
     // TODO: ??? Guarantee
     void pop_back()
     {
-        erase(end() - 1);
+        erase(end()-1);
     }
 
     // swap
@@ -202,9 +202,6 @@ FSTArray<F>::FSTArray(const FSTArray<F> & other)
         delete [] _data;
         throw;
     }
-    // FIXME: The above call to std::copy does not throw, since it copies int
-    //  values. But if value_type is changed, then the call may throw, in
-    //  which case this copy ctor may need to be rewritten.
 }
 
 
@@ -216,7 +213,9 @@ FSTArray<F>::FSTArray(FSTArray<F> && other) noexcept
          _size(other._size),
          _data(other._data)
 {
-    swap(other);
+    other._capacity = 0;
+    other._size = 0;
+    other._data = nullptr;
 }
 
 
@@ -246,32 +245,7 @@ FSTArray<F> & FSTArray<F>::operator=(FSTArray<F> && other) noexcept
 template <typename F>
 void FSTArray<F>::resize(FSTArray<F>::size_type newsize)
 {
-    // if newsize <= capacity set _size to newsize
-    if (newsize <= _capacity) {
-        _size = newsize;
-    }
-    // newSize = newsize,
-    // newData using std:copy (cleanup) newCapacity = 2 * capacity,
-    // if not allowed then set to newSize.
-    else
-    {
-        // if FSTArray<F> dummy(capacity*2); // FIXME
-        FSTArray<F> dummy(newsize); // Dummy Object
-        // else FSTArray<F> dummy(newsize); // FIXME
-        
-        try {
-            std::copy(this->begin(), this->end(), dummy.begin());
-        }
-        catch (...) {
-            delete[] _data;
-            throw;
-        }
-
-        // after data is copied into dummy function, swap dummy obj with current obj
-        swap(dummy);
-    }
-
-
+    // TODO: WRITE THIS!!!
 }
 
 
@@ -281,12 +255,8 @@ template <typename F>
 typename FSTArray<F>::iterator FSTArray<F>::insert(FSTArray<F>::iterator pos,
                                                    const FSTArray<F>::value_type & item)
 {
-    if (pos == end()) {
-        return -1;
-    } else {
-        std::rotate(pos, end() - 1, end());
-    }
-    return begin();
+    // TODO: WRITE THIS!!!
+    return begin();  // DUMMY
 }
 
 
@@ -297,7 +267,7 @@ typename FSTArray<F>::iterator FSTArray<F>::erase(FSTArray<F>::iterator pos)
 {
     std::rotate(pos, pos + 1, end());
     resize(_size - 1);
-    return begin();
+    return pos;
 }
 
 
