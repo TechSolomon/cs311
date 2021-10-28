@@ -228,7 +228,7 @@ FSTArray<F>::FSTArray(FSTArray<F> && other) noexcept
 template <typename F>
 FSTArray<F> & FSTArray<F>::operator=(const FSTArray<F> & other)
 {
-    FSTArray<F> copy_of_other(other.size());
+    FSTArray<F> copy_of_other(other);
     swap(copy_of_other);
     return *this;
 }
