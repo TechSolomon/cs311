@@ -244,45 +244,69 @@ FSTArray<F> & FSTArray<F>::operator=(FSTArray<F> && other) noexcept
 }
 
 
+//// resize
+//// See header for info.
+//template <typename F>
+//void FSTArray<F>::resize(FSTArray<F>::size_type newsize)
+//{
+//    // if newsize =< capacity set _size to newsize 
+//    if (newsize <= _capacity) {
+//        _size = newsize;
+//    }
+//    //newSize = newsize, newData using std:copy (cleanup) newCapacity = 2 * capacity, if not allowed then set to newSize.
+//    else
+//    {
+//        FSTArray<F> dummy(newsize);// Dummy Object to hold data with _size set to newsize;
+//
+//        //sets the _capacity to the largest of either newsize or 2* previous capacity.
+//            dummy._capacity = std::max(newsize, size_type(2 * _capacity));
+//            dummy._data = new value_type[_capacity];
+//
+//        //copies Data over from current object
+//        try {
+//            std::copy(begin(), end(), dummy.begin());
+//        }
+//        catch (...) {
+//         //Catcing exceptions thrown by std::copy
+//            dummy.~FSTArray();
+//            throw;
+//        }
+//
+//        swap(dummy);
+//        //Dummy should deconstruct after going out of scope....
+//    }
+//
+//
+//}
+
 // resize
 // See header for info.
 template <typename F>
 void FSTArray<F>::resize(FSTArray<F>::size_type newsize)
 {
-    // if newsize =< capacity set _size to newsize 
-    if (newsize <= _capacity) {
+    if (newsize <= _capacity)
         _size = newsize;
-    }
-    //newSize = newsize, newData using std:copy (cleanup) newCapacity = 2 * capacity, if not allowed then set to newSize.
+
     else
     {
-        // if FSTArray<F> dummy(capacity*2); //?
-        // else FSTArray<F> dummy(newsize); //?
         FSTArray<F> dummy(newsize);// Dummy Object to hold data with _size set to newsize;
- 
-            try {
-                dummy._capacity = std::max(newsize, size_type(2 * this->_capacity));
-            }
-            catch (const std::bad_alloc) {
-                dummy.~FSTArray(); //Destruct the object 
-                throw;
-            }
 
-        //copies Data over from current object
+        //sets the _capacity to the largest of either newsize or 2* previous capacity.
+            dummy._capacity = std::max(newsize, size_type(2 * _capacity));
+            dummy._data = new value_type[_capacity];
+
+
         try {
-            std::copy(this->begin(), this->end(), dummy.begin());
+            std::copy(begin(), end(), dummy.begin());
         }
+
         catch (...) {
-            dummy.~FSTArray();
+            // dont need to dereference dummy after the catch block it gets dereferenced as it goes out of scope because its an object. 
             throw;
         }
 
-        // after data is copied into dummy function, swap dummy obj with current obj
-        this->swap(dummy);
-        //Dummy should deconstruct after going out of scope....
+        swap(dummy);
     }
-
-
 }
 
 
