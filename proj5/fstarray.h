@@ -259,14 +259,12 @@ void FSTArray<F>::resize(FSTArray<F>::size_type newsize)
         // if FSTArray<F> dummy(capacity*2); //?
         // else FSTArray<F> dummy(newsize); //?
         FSTArray<F> dummy(newsize);// Dummy Object to hold data with _size set to newsize;
-
-           // Not sure if this is right, I cant think of another way to handle a badalloc from allocating new memory. 
+ 
             try {
-                dummy._capacity = size_type(2 * this->_capacity);
+                dummy._capacity = std::max(newsize, size_type(2 * this->_capacity));
             }
             catch (const std::bad_alloc) {
-                delete[]  dummy._data;
-                dummy._capacity = newsize;
+                dummy.~FSTArray(); //Destruct the object 
                 throw;
             }
 
@@ -275,7 +273,7 @@ void FSTArray<F>::resize(FSTArray<F>::size_type newsize)
             std::copy(this->begin(), this->end(), dummy.begin());
         }
         catch (...) {
-          delete[]  dummy._data;
+            dummy.~FSTArray();
             throw;
         }
 
