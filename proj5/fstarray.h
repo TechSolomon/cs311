@@ -249,14 +249,26 @@ void FSTArray<F>::resize(FSTArray<F>::size_type newsize)
 {
     if (newsize <= _capacity)
         _size = newsize;
+    }
 
     else
     {
         FSTArray<F> dummy(newsize);// Dummy Object to hold data with _size set to newsize;
 
         //sets the _capacity to the largest of either newsize or 2* previous capacity.
-            dummy._capacity = std::max(newsize, size_type(2 * _capacity));
+        dummy._capacity = std::max(newsize, size_type(2 * _capacity));
+
+        try {
             dummy._data = new value_type[dummy._capacity];
+        }
+
+        catch (...) {
+            // dont need to dereference dummy after the catch block it gets dereferenced as it goes out of scope because its an object. 
+          
+            throw;
+        }
+
+        
 
         try {
             std::copy(begin(), end(), dummy.begin());
@@ -264,13 +276,15 @@ void FSTArray<F>::resize(FSTArray<F>::size_type newsize)
 
         catch (...) {
             // dont need to dereference dummy after the catch block it gets dereferenced as it goes out of scope because its an object. 
+            delete[] dummy._data;
             throw;
         }
-
         swap(dummy);
     }
+
 }
 
+//clear()
 
 // insert
 // See header for info.
