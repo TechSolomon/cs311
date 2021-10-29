@@ -241,6 +241,8 @@ void FSTArray<F>::resize(FSTArray<F>::size_type newsize)
         FSTArray<F> dummy(newsize);// Dummy Object to hold data with _size set to newsize;
         //sets the _capacity to the largest of either newsize or 2* previous capacity.
         dummy._capacity = std::max(newsize, size_type(2 * _capacity));
+        delete[] dummy._data;
+
         try {
             dummy._data = new value_type[dummy._capacity];
         }
@@ -257,7 +259,7 @@ void FSTArray<F>::resize(FSTArray<F>::size_type newsize)
         }
         
         swap(dummy);
-        dummy.clear();
+        
     }
     
 }
