@@ -10,17 +10,15 @@
 #include <cstddef>
 // For std::size_t
 #include <algorithm>
-// For std::max
-
+// For std::max, std::copy, std::rotate, std::swap
 
 // *********************************************************************
 // class FSTArray - Class definition
 // *********************************************************************
 
 
-// FIXME:
 // class FSTArray
-// Frightfully Smart Array of int.
+// Frightfully Smart Template Array
 // Resizable, copyable/movable, exception-safe.
 // Invariants:
 //     0 <= _size <= _capacity.
@@ -64,24 +62,35 @@ public:
 
     // Copy ctor
     // Strong Guarantee
+    // Pre:
+    // - Must be of the type FSTArray.
+    // Error:
+    // - May throw std::bad_alloc or std::terminate.
     FSTArray(const FSTArray & other);
 
     // Move ctor
     // No-Throw Guarantee
+    // Pre:
+    // - Must be of the type FSTArray.
     FSTArray(FSTArray && other) noexcept;
 
     // Copy assignment operator
-    // TODO: ??? Guarantee
+    // No-Throw Guarantee
+    // Pre:
+    // - Must be of the type FSTArray.
     FSTArray & operator=(const FSTArray & other);
 
     // Move assignment operator
     // No-Throw Guarantee
+    // Pre:
+    // - Must be of the type FSTArray.
     FSTArray & operator=(FSTArray && other) noexcept;
 
     // Dctor
     // No-Throw Guarantee
-    ~FSTArray()
-    {
+    // Pre:
+    // - None.
+    ~FSTArray() {
         delete [] _data;
     }
 
@@ -89,15 +98,13 @@ public:
 public:
 
     // operator[] - non-const & const
-    // Pre:
-    // TODO:    ???
     // No-Throw Guarantee
-    value_type & operator[](size_type index)
-    {
+    // Pre:
+    // - 0 <= index <= _size - 1.
+    value_type & operator[](size_type index) {
         return _data[index];
     }
-    const value_type & operator[](size_type index) const
-    {
+    const value_type & operator[](size_type index) const {
         return _data[index];
     }
 
@@ -106,69 +113,76 @@ public:
 
     // size
     // No-Throw Guarantee
-    [[nodiscard]] size_type size() const noexcept
-    {
+    [[nodiscard]] size_type size() const noexcept {
         return _size;
     }
 
     // empty
     // No-Throw Guarantee
-    [[nodiscard]] bool empty() const noexcept
-    {
+    [[nodiscard]] bool empty() const noexcept {
         return size() == 0;
     }
 
     // begin - non-const & const
     // No-Throw Guarantee
-    iterator begin() noexcept
-    {
+    iterator begin() noexcept {
         return _data;
     }
-    [[nodiscard]] const_iterator begin() const noexcept
-    {
+    [[nodiscard]] const_iterator begin() const noexcept {
         return _data;
     }
 
     // end - non-const & const
     // No-Throw Guarantee
-    iterator end() noexcept
-    {
+    iterator end() noexcept {
         return begin() + size();
     }
-    [[nodiscard]] const_iterator end() const noexcept
-    {
+    [[nodiscard]] const_iterator end() const noexcept {
         return begin() + size();
     }
 
     // resize
-    // TODO: ??? Guarantee
+    // Basic Guarantee
+    // Pre:
+    // - newsize >= 0.
+    // Error:
+    // - May throw std::bad_alloc or std::terminate.
     void resize(size_type newsize);
 
     // insert
-    // TODO: ??? Guarantee
+    // Basic Guarantee
+    // Pre:
+    // - pos must be within bounds of the FSTArray.
     iterator insert(iterator pos,
                     const value_type & item);
 
     // erase
-    // TODO: ??? Guarantee
+    // Basic Guarantee
+    // Pre:
+    // - pos must be within bounds of the FSTArray.
+    // - _size >= 1.
     iterator erase(iterator pos);
 
     // push_back
-    // TODO: ??? Guarantee
-    void push_back(const value_type & item)
-    {
+    // Basic Guarantee
+    // Pre:
+    // - None.
+    void push_back(const value_type & item) {
         insert(end(), item);
     }
 
     // pop_back
-    // TODO: ??? Guarantee
-    void pop_back()
-    {
+    // Basic Guarantee
+    // Pre:
+    // - end() >= 1.
+    void pop_back() {
         erase(end()-1);
     }
 
     // swap
     // No-Throw Guarantee
+    // Pre:
+    // - Must be of the type FSTArray.
     void swap(FSTArray & other) noexcept;
 
 // ***** FSTArray: data members *****
@@ -194,8 +208,7 @@ FSTArray<F>::FSTArray(const FSTArray<F> & other)
         :_capacity(other._capacity),
          _size(other.size()),
          _data(other._capacity == 0 ? nullptr
-                                    : new value_type[other._capacity])
-{
+                                    : new value_type[other._capacity]) {
     try {
         std::copy(other.begin(), other.end(), begin());
     }
@@ -203,9 +216,6 @@ FSTArray<F>::FSTArray(const FSTArray<F> & other)
         delete [] _data;
         throw;
     }
-    // FIXME: The above call to std::copy does not throw, since it copies int
-    //  values. But if value_type is changed, then the call may throw, in
-    //  which case this copy ctor may need to be rewritten.
 }
 
 
@@ -215,8 +225,7 @@ template <typename F>
 FSTArray<F>::FSTArray(FSTArray<F> && other) noexcept
         :_capacity(other._capacity),
          _size(other._size),
-         _data(other._data)
-{
+         _data(other._data) {
     other._capacity = 0;
     other._size = 0;
     other._data = nullptr;
@@ -226,29 +235,48 @@ FSTArray<F>::FSTArray(FSTArray<F> && other) noexcept
 // Copy assignment operator
 // See header for info.
 template <typename F>
-FSTArray<F> & FSTArray<F>::operator=(const FSTArray<F> & other)
-{
-    // TODO: WRITE THIS!!!
-    return *this; // DUMMY
+FSTArray<F> & FSTArray<F>::operator=(const FSTArray<F> & other) {
+    FSTArray<F> duplicate(other);
+    swap(duplicate);
+    return *this;
 }
 
 
 // Move assignment operator
 // See header for info.
 template <typename F>
-FSTArray<F> & FSTArray<F>::operator=(FSTArray<F> && other) noexcept
-{
-    // TODO: WRITE THIS!!!
-    return *this; // DUMMY
+FSTArray<F> & FSTArray<F>::operator=(FSTArray<F> && other) noexcept {
+    swap(other);
+    return *this;
 }
 
 
 // resize
 // See header for info.
 template <typename F>
-void FSTArray<F>::resize(FSTArray<F>::size_type newsize)
-{
-    // TODO: WRITE THIS!!!
+void FSTArray<F>::resize(FSTArray<F>::size_type newsize) {
+    if (newsize <= _capacity) {
+        _size = newsize;
+    }
+
+    else {
+        size_type limit = std::max(_capacity, newsize * 2);
+        auto *dummy = new value_type[limit];
+
+        try {
+            std::copy(begin(), end(), dummy);
+        }
+        catch (...) {
+            delete [] dummy;
+            throw;
+        }
+
+        delete [] _data;
+
+        std::swap(_size, newsize);
+        std::swap(_capacity, limit);
+        std::swap(_data, dummy);
+    }
 }
 
 
@@ -256,31 +284,44 @@ void FSTArray<F>::resize(FSTArray<F>::size_type newsize)
 // See header for info.
 template <typename F>
 typename FSTArray<F>::iterator FSTArray<F>::insert(FSTArray<F>::iterator pos,
-                                                   const FSTArray<F>::value_type & item)
-{
-    // TODO: WRITE THIS!!!
-    return begin();  // DUMMY
+                                                   const FSTArray<F>::value_type & item) {
+    std::size_t index = pos - begin();
+    std::size_t increment = _size + 1;
+
+    if (pos == end()) {
+        resize(increment);
+        _data[index] = item;
+    }
+
+    else {
+        _data[_size] = item;
+        resize(increment);
+        std::rotate(pos, end() - 1, end());
+    }
+
+    return index + begin();
 }
 
 
 // erase
 // See header for info.
 template <typename F>
-typename FSTArray<F>::iterator FSTArray<F>::erase(FSTArray<F>::iterator pos)
-{
-    // TODO: WRITE THIS!!!
-    return begin();  // DUMMY
+typename FSTArray<F>::iterator FSTArray<F>::erase(FSTArray<F>::iterator pos) {
+    std::size_t decrement = _size - 1;
+
+    std::rotate(pos, pos + 1, end());
+    resize(decrement);
+    return pos;
 }
 
 
 // swap
 // See header for info.
 template <typename F>
-void FSTArray<F>::swap(FSTArray<F> & other) noexcept
-{
-    // TODO: WRITE THIS!!!
+void FSTArray<F>::swap(FSTArray<F> & other) noexcept {
+    std::swap(_size, other._size);
+    std::swap(_capacity, other._capacity);
+    std::swap(_data, other._data);
 }
-
-// End class FSTArray
 
 #endif //PROJ5_FSTARRAY_H
