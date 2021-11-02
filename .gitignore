@@ -40,3 +40,5 @@ cmake-build-debug/
 .DS_Store
 /proj5/.vs
 /proj5/out/build/x64-Debug
+/proj6/.vs/proj6/v16
+/proj6/.vs
