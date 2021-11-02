@@ -42,3 +42,7 @@ cmake-build-debug/
 /proj5/out/build/x64-Debug
 /proj6/.vs/proj6/v16
 /proj6/.vs
+/proj6/out/build/x64-Debug/Testing/Temporary
+/proj6/out/build/x64-Debug/CMakeFiles
+/proj6/out/build/x64-Debug/.cmake/api/v1
+/proj6/out/build/x64-Debug
