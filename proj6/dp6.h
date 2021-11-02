@@ -18,7 +18,10 @@ void reverseList(std::unique_ptr<LLNode2<ValType>> & head) {
 // Exercise B — Associative Dataset Class Template
 template<typename KVType>
 class LLMap {
-    // TODO: WRITE THIS!!!
+public:
+
+private:
+
 };
 
 #endif //PROJ6_DP6_H
