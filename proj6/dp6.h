@@ -57,13 +57,9 @@ public:
 public:
 
     // size
+    //No-Throw Guarantee
     [[nodiscard]] size_t size() const {
-        int counter = 0;
-        while (true) {
-            if(_data.)
-            ++counter;
-            
-        }
+        return _data->size(_data.get());
     }
 
     //empty
@@ -81,7 +77,7 @@ public:
     data_type* find(const key_type& key) {
         //TODO: WRITE THIS!!!
        //if Data_type found
-        return _data*;
+        return _data.get();
         //else not found
         return nullptr;
     }
@@ -91,7 +87,7 @@ public:
     const data_type* find(const key_type& key) const {
         //TODO: WRITE THIS!!!
         //if Data_type found
-        return const _data*;
+        return const _data.get();
         //else not found
         return nullptr;
     }
@@ -102,7 +98,7 @@ public:
         // TODO: WRITE THIS!!!
         if (find(key) != nullptr)
         {
-            
+            _data->push_front(_data.get(), value)
         }
         else
         {
