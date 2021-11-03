@@ -105,7 +105,7 @@ public:
         auto p = find(key);
         if (p != nullptr)
         {
-            p->second() = value;
+            *p.second() = value;
         }
         else
         {
@@ -118,13 +118,13 @@ public:
     void erase(key_type key) {
         auto p = find(key);
         if (p != nullptr) {
-         p   
+         //free data
         }
     }
 
     //Transverse
     // ??? Guarantee
-    void traverse(const std::function<void(key_type, data_type)> example) const {
+    void traverse(const std::function<key_type, data_type>) const {
         // TODO: WRITE THIS!!!
         //auto go through LLMAP
         //someFunction() works on data
