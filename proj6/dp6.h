@@ -73,44 +73,52 @@ public:
     }
 
     //Non-Const Find
-    //??? Guarantee
+    //No-Throw Guarantee
     data_type* find(const key_type& key) {
-        //TODO: WRITE THIS!!!
-       //if Data_type found
-        return _data.get();
-        //else not found
+
+        auto p = _data.get();
+        while (p != nullptr) {
+            if (key == *p.first()) {
+                return _data.get();
+            }
+           p = p->_next.get();
+        }
         return nullptr;
     }
 
     //Const Find
     //??? Guarantee
     const data_type* find(const key_type& key) const {
-        //TODO: WRITE THIS!!!
-        //if Data_type found
-        return const _data.get();
-        //else not found
+        auto p = _data.get();
+        while (p != nullptr) {
+            if (key == *p.first()) {
+                return const _data.get();
+            }
+            p = p->_next.get();
+        }
         return nullptr;
     }
 
    //Insert
    //??? Guarantee
     void insert(key_type key, data_type value) {
-        // TODO: WRITE THIS!!!
-        if (find(key) != nullptr)
+        auto p = find(key);
+        if (p != nullptr)
         {
-            _data->push_front(_data.get(), value)
+            p->second() = value;
         }
         else
         {
-            _data = unique_ptr<LLNode2<std::pair<key,value>>>;
+            _data->push_front(_data.get(), std::pair<key, value>);
         }
     }
 
     //Erase
     //No-Throw Guarantee
     void erase(key_type key) {
-        if (find(key)) {
-
+        auto p = find(key);
+        if (p != nullptr) {
+         p   
         }
     }
 
