@@ -37,6 +37,11 @@ class LLMap {
 
     using pair_type = std::pair<key_type, data_type>;
 
+
+    // ***** LLMap: Data Member *****
+private:
+    std::unique_ptr<LLNode2<pair_type>> _data;
+
 public:
 
     // ***** LLMAP: ctors, dctors, ops *****
@@ -63,8 +68,8 @@ public:
     // size
     // No-Throw Guarantee
     [[nodiscard]] size_t size() const {
-        // return _data->size(_data.get());
-        return 42; // DUMMY
+        return _data->size(_data.get());
+      
     }
 
     // empty
@@ -92,19 +97,20 @@ public:
     // Const Find
     // TODO: ??? Guarantee
     const data_type* find(const key_type& key) const {
-        auto ptr = _data.get();
-//        while (ptr != nullptr) {
-//            if (key == *ptr->_next())
-//                return _data.get();
-//            ptr = ptr->_next.get();
-//        }
+       LLNode2<pair_type> *ptr = _data.get();
+       
+        while (_data) 
+        {
+            if (key == ptr->_data.first())  return * ptr->_data;
+            else  ptr = ptr->_next.get();
+        }
         return nullptr;
     }
 
    // Insert
    // TODO: ??? Guarantee
     void insert(key_type key, data_type value) {
-        auto p = find(key);
+        pair_type * ptr = find(key);
 //        if (p != nullptr)
 //            p.second() = value;
 //        else
@@ -129,10 +135,6 @@ public:
         // end
     }
 
-
-    // ***** LLMap: Data Member *****
-private:
-    std::unique_ptr<LLNode2<pair_type>> _data;
 };
 
 #endif //PROJ6_DP6_H
