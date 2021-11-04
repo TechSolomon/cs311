@@ -84,14 +84,17 @@ public:
 
     // Non-Const Find
     // No-Throw Guarantee
+    //Returns pointer to the pair.second;
     data_type* find(const key_type& key) {
 
         LLNode2<pair_type>* ptr = _ptrNode.get();
 
-        while (_ptrNode)
+        while (ptr != nullptr)
         {
-            pair_type dummyPair = ptr->_data;
-            if (key == dummyPair.first)  return  &dummyPair.second;
+            pair_type * dummyPair = &ptr->_data;
+            
+            if (key == dummyPair->first)  return  &dummyPair->second;
+            //else if()
             else  ptr = ptr->_next.get();
         }
         return nullptr;
@@ -103,10 +106,12 @@ public:
 
         LLNode2<pair_type>* ptr = _ptrNode.get();
 
-        while (_ptrNode)
+        while (ptr != nullptr)
         {
-            pair_type dummyPair = ptr->_data;
-            if (key == dummyPair.first)  return &dummyPair.second;
+            pair_type* dummyPair = &ptr->_data;
+
+            if (key == dummyPair->first)  return  &dummyPair->second;
+            //else if()
             else  ptr = ptr->_next.get();
         }
         return nullptr;
@@ -114,22 +119,20 @@ public:
 
    // Insert
    // TODO: ??? Guarantee
-    void insert(key_type key, data_type value) {
-        data_type * dummyValue = find(key);
+    void insert(const key_type key, data_type value) {
+        data_type * dummyPtr = find(key);
         //pair_type dummyPair{ key,value };
-        if (dummyValue != nullptr) {
-            dummyValue = &value;
-           // pair_type dummyData = ptr->_data;
+        if (dummyPtr != nullptr) {
            
-           // swap(dummyPair, dummyData);
-            
+            dummyPtr = &value;
+         
         }
-        else push_front(_ptrNode, pair_type{ key,value });
+        else push_front(_ptrNode,pair_type{key,value});
     }
 
     // Erase
     // No-Throw Guarantee
-    void erase(key_type key) {
+    void erase(const key_type key) {
         auto p = find(key);
         if (p != nullptr) {
          // free data
