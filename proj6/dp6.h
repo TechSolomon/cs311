@@ -9,20 +9,25 @@
 
 #include "llnode2.h"
 
-#include <memory> // For std::unique_ptr
+#include <memory> // For std::unique_ptr, std::swap
 #include <utility> // For std::move, std::pair
 #include <functional> // For std::function
 
-// Exercise A — Reversing a Linked List
+// TODO: Exercise A — Reversing a Linked List
+// - newHead will point to this new list, which holds nodes that have been reversed.
+// - head points to the nodes that are not reversed yet.
+// - To finish, set head = newHead (unique_ptr).
 template<typename ValType>
-void reverseList(std::unique_ptr<LLNode2<ValType>>& head) {
+void reverseList(std::unique_ptr<LLNode2<ValType>> &head) {
 
-    //while (head) {
-    //    std::unique_ptr<LLNode2<ValType>> newHead;
-    //    newHead.swap(head->_next);
-    //    head.swap(newHead);
-    //    head = std::move(newHead);
-    //}
+    std::unique_ptr<LLNode2<ValType>> newHead;
+
+    while (head) {
+        newHead.swap(head->_next);
+        head.swap(newHead);
+    }
+
+    head = std::move(newHead);
 }
 
 // Exercise B — Associative Dataset Class Template (LLMap)
