@@ -9,6 +9,10 @@
 
 #include "llnode2.h"
 
+#include <memory> // For std::unique_ptr
+#include <utility> // For std::move, std::pair
+#include <functional> // For std::function
+
 // Exercise A — Reversing a Linked List
 template<typename ValType>
 void reverseList(std::unique_ptr<LLNode2<ValType>> & head) {
@@ -18,8 +22,8 @@ void reverseList(std::unique_ptr<LLNode2<ValType>> & head) {
 // Exercise B — Associative Dataset Class Template
 
 
-//Class LLMap
-//KVType must be std::pair or struct (or any appropriate key-value type)
+// Class LLMap
+// pair_type must be std::pair or struct (or any appropriate key-value type)
 
 
 template<typename Key, typename Val>
@@ -31,7 +35,7 @@ class LLMap {
     // data_type: type of data items
     using data_type = Val;
 
-   using KVType = std::pair<key_type, data_type>;
+    using pair_type = std::pair<key_type, data_type>;
 
 public:
 
@@ -57,84 +61,78 @@ public:
 public:
 
     // size
-    //No-Throw Guarantee
+    // No-Throw Guarantee
     [[nodiscard]] size_t size() const {
-        return _data->size(_data.get());
+        // return _data->size(_data.get());
+        return 42; // DUMMY
     }
 
-    //empty
-    //No-Throw Guarantee
+    // empty
+    // No-Throw Guarantee
     [[nodiscard]] bool empty() const {
-        if (!_data) //checks if _data (smartpointer) is null
-        {
+        if (!_data) //checks if _data (smart pointer) is null
             return true;
-        }
-        else return false;
+        else
+            return false;
     }
 
-    //Non-Const Find
-    //No-Throw Guarantee
+    // Non-Const Find
+    // No-Throw Guarantee
     data_type* find(const key_type& key) {
 
-        auto p = _data.get();
-        while (p != nullptr) {
-            if (key == *p.first()) {
-                return _data.get();
-            }
-           p = p->_next.get();
-        }
+//        auto p = _data.get();
+//        while (p != nullptr) {
+//            if (key == p->_next())
+//                return _data.get();
+//           p = p->_next.get();
+//        }
         return nullptr;
     }
 
-    //Const Find
-    //??? Guarantee
+    // Const Find
+    // TODO: ??? Guarantee
     const data_type* find(const key_type& key) const {
-        auto p = _data.get();
-        while (p != nullptr) {
-            if (key == *p.first()) {
-                return const _data.get();
-            }
-            p = p->_next.get();
-        }
+        auto ptr = _data.get();
+//        while (ptr != nullptr) {
+//            if (key == *ptr->_next())
+//                return _data.get();
+//            ptr = ptr->_next.get();
+//        }
         return nullptr;
     }
 
-   //Insert
-   //??? Guarantee
+   // Insert
+   // TODO: ??? Guarantee
     void insert(key_type key, data_type value) {
         auto p = find(key);
-        if (p != nullptr)
-        {
-            *p.second() = value;
-        }
-        else
-        {
-            _data->push_front(_data.get(), std::pair<key, value>);
-        }
+//        if (p != nullptr)
+//            p.second() = value;
+//        else
+//            _data->push_front(_data, pair_type());
     }
 
-    //Erase
-    //No-Throw Guarantee
+    // Erase
+    // No-Throw Guarantee
     void erase(key_type key) {
         auto p = find(key);
         if (p != nullptr) {
-         //free data
+         // free data
         }
     }
 
-    //Transverse
-    // ??? Guarantee
-    void traverse(const std::function<key_type, data_type>) const {
+    // Transverse
+    // TODO: ??? Guarantee
+    void traverse(const std::function<void(key_type, data_type)> example) const {
         // TODO: WRITE THIS!!!
-        //auto go through LLMAP
-        //someFunction() works on data
-        //end
+        // auto go through LLMAP
+        // someFunction() works on data
+        // end
     }
 
 
     // ***** LLMap: Data Member *****
 private:
-    std::unique_ptr<LLNode2<KVType>> _data;
+    std::unique_ptr<LLNode2<pair_type>> _data;
 };
 
 #endif //PROJ6_DP6_H
