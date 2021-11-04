@@ -389,3 +389,5 @@ MigrationBackup/
 cmake-build-debug/
 
 .DS_Store
+/proj6/out/build/x64-Debug
+/proj5/out/build/x64-Debug
