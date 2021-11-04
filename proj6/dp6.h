@@ -15,8 +15,14 @@
 
 // Exercise A — Reversing a Linked List
 template<typename ValType>
-void reverseList(std::unique_ptr<LLNode2<ValType>> & head) {
-    // TODO: WRITE THIS!!!
+void reverseList(std::unique_ptr<LLNode2<ValType>>& head) {
+
+    while (head) {
+        std::unique_ptr<LLNode2<ValType>> newHead;
+        newHead.swap(head->_next);
+        head.swap(newHead);
+        head = std::move(newHead);
+    }
 }
 
 // Exercise B — Associative Dataset Class Template (LLMap)
