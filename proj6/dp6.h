@@ -13,7 +13,7 @@
 #include <utility> // For std::move, std::pair
 #include <functional> // For std::function
 
-// TODO: Exercise A — Reversing a Linked List
+// Exercise A — Reversing a Linked List
 // - newHead will point to this new list, which holds nodes that have been reversed.
 // - head points to the nodes that are not reversed yet.
 // - To finish, set head = newHead (unique_ptr).
@@ -41,7 +41,7 @@ class LLMap {
     // data_type: type of data items
     using data_type = Val;
 
-    // FIXME – pair_type: type of _____ items
+    // pair_type: pair of specified key_type & data_type items
     using pair_type = std::pair<key_type, data_type>;
 
 // ***** LLMap: Data Member *****
@@ -76,10 +76,8 @@ public:
     // empty
     // No-Throw Guarantee
     [[nodiscard]] bool empty() const {
-        if (_ptrNode)
-            return false; // checks if _data (smart pointer) is null
-        else
-            return true;
+        if (_ptrNode) return false; // checks if _data (smart pointer) is null
+        else return true;
     }
 
     // Non-Const Find
@@ -87,12 +85,9 @@ public:
     // FIXME: Returns pointer to the pair.second;
     data_type* find(const key_type& key) {
         LLNode2<pair_type>* ptr = _ptrNode.get();
-
-        while (ptr != nullptr)
-        {
-            if (ptr->_data.first == key)  return  &ptr->_data.second;
-
-            else  ptr = ptr->_next.get();
+        while (ptr != nullptr) {
+            if (ptr->_data.first == key) return  &ptr->_data.second;
+            else ptr = ptr->_next.get();
         }
         return nullptr;
     }
@@ -101,12 +96,9 @@ public:
     // TODO: No-Throw Guarantee
     const data_type* find(const key_type& key) const {
         LLNode2<pair_type>* ptr = _ptrNode.get();
-
-        while (ptr != nullptr)
-        {
-            if (ptr->_data.first == key)  return  &ptr->_data.second;
-
-            else  ptr = ptr->_next.get();
+        while (ptr != nullptr) {
+            if (ptr->_data.first == key) return  &ptr->_data.second;
+            else ptr = ptr->_next.get();
         }
         return nullptr;
     }
@@ -115,38 +107,37 @@ public:
    // TODO: ??? Guarantee
     void insert(const key_type key, data_type value) {
         data_type * dummyPtr = find(key);
-        // pair_type dummyPair{ key,value };
-        if (dummyPtr != nullptr)  dummyPtr = &value;
+        if (dummyPtr != nullptr) dummyPtr = &value;
         else push_front(_ptrNode,pair_type{key,value});
     }
 
     // Erase
     // No-Throw Guarantee
     void erase(const key_type key) {
-
         auto ptr = _ptrNode.get();
         auto prevPtr = &_ptrNode;
-        while (ptr != nullptr)
-        {
-            
-            if (ptr->_data.first == key) 
-            {
+        while (ptr != nullptr) {
+            if (ptr->_data.first == key) {
                 *prevPtr = std::move(ptr->_next);
                 break;
             }
-
             prevPtr = &ptr->_next;
             ptr = ptr->_next.get();
         }
     }
 
-    // Transverse
+    // Traverse
     // TODO: ??? Guarantee
     void traverse(const std::function<void(key_type, data_type)> example) const {
-        // TODO: WRITE THIS!!!
-        // auto go through LLMap
-        // someFunction() works on data
-        // end
+        auto ptr = _ptrNode.get();
+        key_type *key;
+        data_type *value;
+        while (ptr != nullptr) {
+            key = &ptr->_data.first;
+            value = &ptr->_data.second;
+            example(*key, *value);
+            ptr = ptr->_next.get();
+        }
     }
 
 };
