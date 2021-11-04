@@ -20,12 +20,14 @@
 template<typename ValType>
 void reverseList(std::unique_ptr<LLNode2<ValType>> &head) {
 
+    std::unique_ptr<LLNode2<ValType>> newHead;
+
     while (head) {
-        std::unique_ptr<LLNode2<ValType>> newHead;
         newHead.swap(head->_next);
         head.swap(newHead);
-        head = std::move(newHead);
     }
+
+    head = std::move(newHead);
 }
 
 // TODO: Exercise B — Associative Dataset Class Template
