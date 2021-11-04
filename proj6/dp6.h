@@ -17,12 +17,12 @@
 template<typename ValType>
 void reverseList(std::unique_ptr<LLNode2<ValType>>& head) {
 
-    while (head) {
-        std::unique_ptr<LLNode2<ValType>> newHead;
-        newHead.swap(head->_next);
-        head.swap(newHead);
-        head = std::move(newHead);
-    }
+    //while (head) {
+    //    std::unique_ptr<LLNode2<ValType>> newHead;
+    //    newHead.swap(head->_next);
+    //    head.swap(newHead);
+    //    head = std::move(newHead);
+    //}
 }
 
 // Exercise B — Associative Dataset Class Template (LLMap)
@@ -111,10 +111,8 @@ public:
     void insert(const key_type key, data_type value) {
         data_type * dummyPtr = find(key);
         // pair_type dummyPair{ key,value };
-        if (dummyPtr != nullptr)
-            dummyPtr = &value;
-        else
-            push_front(_ptrNode,pair_type{key,value});
+        if (dummyPtr != nullptr)  dummyPtr = &value;
+        else push_front(_ptrNode,pair_type{key,value});
     }
 
     // Erase
