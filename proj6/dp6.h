@@ -35,7 +35,9 @@ class LLMap {
     // data_type: type of data items
     using data_type = Val;
 
+    // data_type: type of data items
     using pair_type = std::pair<key_type, data_type>;
+
 
 
     // ***** LLMap: Data Member *****
@@ -60,25 +62,24 @@ public:
     LLMap(LLMap&& other) = delete;
     LLMap& operator=(LLMap&& other) = delete;
 
-
-
     // ***** LLMap: Public Functions *****
 public:
 
     // size
     // No-Throw Guarantee
     [[nodiscard]] size_t size() const {
-      //  return _ptrNode->size(_ptrNode.get());
-        return 42;
+        return ::size(_ptrNode);
+
     }
 
     // empty
     // No-Throw Guarantee
     [[nodiscard]] bool empty() const {
-        if (!_ptrNode) //checks if _data (smart pointer) is null
-            return true;
-        else
-            return false;
+        
+        if (_ptrNode) return false; //checks if _data (smart pointer) is null
+            
+        else return true;
+           
     }
 
     // Non-Const Find
@@ -97,7 +98,7 @@ public:
     }
 
     // Const Find
-    // TODO: ??? Guarantee
+    // TODO: No-Throw Guarantee
     const data_type* find(const key_type& key) const {
 
         LLNode2<pair_type>* ptr = _ptrNode.get();
@@ -114,11 +115,16 @@ public:
    // Insert
    // TODO: ??? Guarantee
     void insert(key_type key, data_type value) {
-//        pair_type * ptr = find(key);
-//        if (p != nullptr)
-//            p.second() = value;
-//        else
-//            _data->push_front(_data, pair_type());
+        data_type * dummyValue = find(key);
+        //pair_type dummyPair{ key,value };
+        if (dummyValue != nullptr) {
+            dummyValue = &value;
+           // pair_type dummyData = ptr->_data;
+           
+           // swap(dummyPair, dummyData);
+            
+        }
+        else push_front(_ptrNode, pair_type{ key,value });
     }
 
     // Erase
