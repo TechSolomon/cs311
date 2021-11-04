@@ -19,13 +19,8 @@ void reverseList(std::unique_ptr<LLNode2<ValType>> & head) {
     // TODO: WRITE THIS!!!
 }
 
-// Exercise B — Associative Dataset Class Template
-
-
-// Class LLMap
+// Exercise B — Associative Dataset Class Template (LLMap)
 // pair_type must be std::pair or struct (or any appropriate key-value type)
-
-
 template<typename Key, typename Val>
 class LLMap {
 
@@ -35,85 +30,77 @@ class LLMap {
     // data_type: type of data items
     using data_type = Val;
 
-    // data_type: type of data items
+    // FIXME – pair_type: type of _____ items
     using pair_type = std::pair<key_type, data_type>;
 
-
-
-    // ***** LLMap: Data Member *****
+// ***** LLMap: Data Member *****
 private:
+
     std::unique_ptr<LLNode2<pair_type>> _ptrNode;
 
+// ***** LLMap: ctors, dctors, ops *****
 public:
 
-    // ***** LLMAP: ctors, dctors, ops *****
-
     // Ctor
-    LLMap() : _ptrNode(nullptr) {
-
-    }
+    LLMap() : _ptrNode(nullptr) {}
 
     // Dctor
     ~LLMap() = default;
 
-    // No other Big Five functions
+    // No other Big Five functions (copy/move operations)
     LLMap(const LLMap& other) = delete;
     LLMap& operator=(const LLMap& other) = delete;
     LLMap(LLMap&& other) = delete;
     LLMap& operator=(LLMap&& other) = delete;
 
-    // ***** LLMap: Public Functions *****
+// ***** LLMap: Public Functions *****
 public:
 
     // size
     // No-Throw Guarantee
     [[nodiscard]] size_t size() const {
         return ::size(_ptrNode);
-
     }
 
     // empty
     // No-Throw Guarantee
     [[nodiscard]] bool empty() const {
-        
-        if (_ptrNode) return false; //checks if _data (smart pointer) is null
-            
-        else return true;
-           
+        if (_ptrNode)
+            return false; // checks if _data (smart pointer) is null
+        else
+            return true;
     }
 
     // Non-Const Find
     // No-Throw Guarantee
-    //Returns pointer to the pair.second;
+    // FIXME: Returns pointer to the pair.second;
     data_type* find(const key_type& key) {
-
         LLNode2<pair_type>* ptr = _ptrNode.get();
 
-        while (ptr != nullptr)
-        {
+        while (ptr != nullptr) {
             pair_type * dummyPair = &ptr->_data;
-            
-            if (key == dummyPair->first)  return  &dummyPair->second;
-            //else if()
-            else  ptr = ptr->_next.get();
+            if (key == dummyPair->first)
+                return &dummyPair->second;
+            else
+                ptr = ptr->_next.get();
         }
+
         return nullptr;
     }
 
     // Const Find
     // TODO: No-Throw Guarantee
     const data_type* find(const key_type& key) const {
-
         LLNode2<pair_type>* ptr = _ptrNode.get();
 
-        while (ptr != nullptr)
-        {
+        while (ptr != nullptr) {
             pair_type* dummyPair = &ptr->_data;
-
-            if (key == dummyPair->first)  return  &dummyPair->second;
-            //else if()
-            else  ptr = ptr->_next.get();
+            if (key == dummyPair->first)
+                return &dummyPair->second;
+            else
+                ptr = ptr->_next.get();
         }
+
         return nullptr;
     }
 
@@ -121,13 +108,11 @@ public:
    // TODO: ??? Guarantee
     void insert(const key_type key, data_type value) {
         data_type * dummyPtr = find(key);
-        //pair_type dummyPair{ key,value };
-        if (dummyPtr != nullptr) {
-           
+        // pair_type dummyPair{ key,value };
+        if (dummyPtr != nullptr)
             dummyPtr = &value;
-         
-        }
-        else push_front(_ptrNode,pair_type{key,value});
+        else
+            push_front(_ptrNode,pair_type{key,value});
     }
 
     // Erase
@@ -135,7 +120,7 @@ public:
     void erase(const key_type key) {
         auto p = find(key);
         if (p != nullptr) {
-         // free data
+            // TODO: free data
         }
     }
 
@@ -143,7 +128,7 @@ public:
     // TODO: ??? Guarantee
     void traverse(const std::function<void(key_type, data_type)> example) const {
         // TODO: WRITE THIS!!!
-        // auto go through LLMAP
+        // auto go through LLMap
         // someFunction() works on data
         // end
     }
