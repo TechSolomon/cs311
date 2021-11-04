@@ -91,10 +91,8 @@ public:
 
         while (ptr != nullptr)
         {
-            pair_type * dummyPair = &ptr->_data;
-            
-            if (key == dummyPair->first)  return  &dummyPair->second;
-            //else if()
+            if (ptr->_data.first == key)  return  &ptr->_data.second;
+
             else  ptr = ptr->_next.get();
         }
         return nullptr;
@@ -108,10 +106,8 @@ public:
 
         while (ptr != nullptr)
         {
-            pair_type* dummyPair = &ptr->_data;
+            if (ptr->_data.first == key)  return  &ptr->_data.second;
 
-            if (key == dummyPair->first)  return  &dummyPair->second;
-            //else if()
             else  ptr = ptr->_next.get();
         }
         return nullptr;
@@ -121,7 +117,7 @@ public:
    // TODO: ??? Guarantee
     void insert(const key_type key, data_type value) {
         data_type * dummyPtr = find(key);
-        //pair_type dummyPair{ key,value };
+
         if (dummyPtr != nullptr) {
            
             dummyPtr = &value;
@@ -133,9 +129,20 @@ public:
     // Erase
     // No-Throw Guarantee
     void erase(const key_type key) {
-        auto p = find(key);
-        if (p != nullptr) {
-         // free data
+
+        auto ptr = _ptrNode.get();
+        auto prevPtr = &_ptrNode;
+        while (ptr != nullptr)
+        {
+            
+            if (ptr->_data.first == key) 
+            {
+                *prevPtr = std::move(ptr->_next);
+                break;
+            }
+
+            prevPtr = &ptr->_next;
+            ptr = ptr->_next.get();
         }
     }
 
