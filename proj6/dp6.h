@@ -40,14 +40,14 @@ class LLMap {
 
     // ***** LLMap: Data Member *****
 private:
-    std::unique_ptr<LLNode2<pair_type>> _data;
+    std::unique_ptr<LLNode2<pair_type>> _ptrNode;
 
 public:
 
     // ***** LLMAP: ctors, dctors, ops *****
 
     // Ctor
-    LLMap() : _data(nullptr) {
+    LLMap() : _ptrNode(nullptr) {
 
     }
 
@@ -68,14 +68,14 @@ public:
     // size
     // No-Throw Guarantee
     [[nodiscard]] size_t size() const {
-        return _data->size(_data.get());
-      
+      //  return _ptrNode->size(_ptrNode.get());
+        return 42;
     }
 
     // empty
     // No-Throw Guarantee
     [[nodiscard]] bool empty() const {
-        if (!_data) //checks if _data (smart pointer) is null
+        if (!_ptrNode) //checks if _data (smart pointer) is null
             return true;
         else
             return false;
@@ -85,23 +85,27 @@ public:
     // No-Throw Guarantee
     data_type* find(const key_type& key) {
 
-//        auto p = _data.get();
-//        while (p != nullptr) {
-//            if (key == p->_next())
-//                return _data.get();
-//           p = p->_next.get();
-//        }
+        LLNode2<pair_type>* ptr = _ptrNode.get();
+
+        while (_ptrNode)
+        {
+            pair_type dummyPair = ptr->_data;
+            if (key == dummyPair.first)  return  &dummyPair.second;
+            else  ptr = ptr->_next.get();
+        }
         return nullptr;
     }
 
     // Const Find
     // TODO: ??? Guarantee
     const data_type* find(const key_type& key) const {
-       LLNode2<pair_type> *ptr = _data.get();
-       
-        while (_data) 
+
+        LLNode2<pair_type>* ptr = _ptrNode.get();
+
+        while (_ptrNode)
         {
-            if (key == ptr->_data.first())  return * ptr->_data;
+            pair_type dummyPair = ptr->_data;
+            if (key == dummyPair.first)  return &dummyPair.second;
             else  ptr = ptr->_next.get();
         }
         return nullptr;
@@ -110,7 +114,7 @@ public:
    // Insert
    // TODO: ??? Guarantee
     void insert(key_type key, data_type value) {
-        pair_type * ptr = find(key);
+//        pair_type * ptr = find(key);
 //        if (p != nullptr)
 //            p.second() = value;
 //        else
