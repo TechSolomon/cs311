@@ -27,10 +27,10 @@ struct BSTreeNode {
     Value _data; // Data for this node.
 
     // Pointer to Left Node (nullptr -> empty case)
-    std::unique_ptr<BSTreeNode> _left = nullptr;
+    std::unique_ptr<BSTreeNode<Value>> _left = nullptr;
 
     //Pointer to Right Nodes (nullptr -> empty case)
-    std::unique_ptr<BSTreeNode> _right = nullptr;
+    std::unique_ptr<BSTreeNode<Value>> _right = nullptr;
 
     // Ctor
     explicit BSTreeNode(const Value & data) : _data(data) {}
@@ -57,20 +57,16 @@ void insert(std::unique_ptr<BSTreeNode<Value>> & head, const Value & item) {
     // TODO
     if (head) // while head is not null compare item against root value
     {
-        //auto p = head.get();
     // check root against item
-        if (head->_data > item) {
+        if (item < head->_data) {
             insert(head->_left, item); // root > item; go left
         }
-        else if (head->_data < item) {
+        else{
             insert(head->_right, item); // root < item; go right
         }
-        else {
-                insert(head->_left, item);  // FIXME: not sure about = case just doing this for now.
-            }
     }
     else {
-        head->_data = item;
+        head = std::make_unique<BSTreeNode<Value>>(item);
     }
 }
 
@@ -115,7 +111,7 @@ void treesort(FDIter first, FDIter last)
     // Forward Iterator
     for (FDIter it = first; it != last; ++it) 
     {
-    //   insert(ptrBST, *it);
+    insert(ptrBST, *it);
     }
     tree_traversal(ptrBST, first);
 
