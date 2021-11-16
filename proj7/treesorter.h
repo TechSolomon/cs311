@@ -82,9 +82,10 @@ void insert(std::unique_ptr<BSTreeNode<Value>> & head, const Value & item) {
 // Exception safety guarantee:
 //     ???
 template<typename Value, typename FDIter>
-void tree_traversal(std::unique_ptr<BSTreeNode<Value>> & head, const FDIter & object) {
+void tree_traversal(std::unique_ptr<BSTreeNode<Value>> & head, const FDIter & iter) {
     if (head) {
-        // TODO
+        *iter++ = head->_data;
+        ++iter;
     }
 
     if (head->_left) {
