@@ -64,8 +64,11 @@ void insert(std::unique_ptr<BSTreeNode<Value>> & head, const Value & item) {
         else if (head->_data < item) {
             insert(head->_right, item); // root < item; go right
         }
-        else if (head->_data = item) {
-            insert(head->_left, item);  // FIXME: not sure about = case just doing this for now.
+        else {
+            head->_data = item;
+            if (head->_data) {
+                insert(head->_left, item);  // FIXME: not sure about = case just doing this for now.
+            }
         }
 
     }
@@ -75,7 +78,7 @@ void insert(std::unique_ptr<BSTreeNode<Value>> & head, const Value & item) {
     }
 }
 
-// tree_traversal (inorder traversal)
+// TODO: tree_traversal (inorder traversal)
 // Pre:
 //     ???
 // Requirements on Types:
@@ -84,7 +87,7 @@ void insert(std::unique_ptr<BSTreeNode<Value>> & head, const Value & item) {
 //     ???
 template<typename Value, typename FDIter>
 void tree_traversal() {
-    // TODO
+    // DUMMY
 }
 
 // TODO: treesort
