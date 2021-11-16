@@ -83,18 +83,17 @@ void insert(std::unique_ptr<BSTreeNode<Value>> & head, const Value & item) {
 //     ???
 template<typename Value, typename FDIter>
 void tree_traversal(std::unique_ptr<BSTreeNode<Value>> & head, const FDIter & iter) {
-    if (head) {
-        *iter++ = head->_data;
-        ++iter;
+    if(head){
+
+            tree_traversal(head->_left, iter);
+            *iter++ = head->_data;
+            tree_traversal(head->_right, iter);
+    }
+    else
+    {
+        return;
     }
 
-    if (head->_left) {
-        // TODO
-    }
-
-    if (head->_right) {
-        // TODO
-    }
 }
 
 // TODO: treesort
