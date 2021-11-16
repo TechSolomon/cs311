@@ -13,10 +13,24 @@
 #include <iterator> // For std::iterator_traits
 #include <memory> // For std::unique_ptr
 
-// BSTreeNode
-template<typename Value>
+// struct BSTreeNode
+template <typename Value>
 struct BSTreeNode {
-    // TODO
+    Value _data; // Data for this node
+
+    // TODO: pointer left & right nodes
+
+    // Ctor
+    explicit BSTreeNode(const Value & data):_data(data) {}
+
+    // Dctor
+    ~BSTreeNode() = default;
+
+    // No other Big Five functions (copy/move operations)
+    BSTreeNode(const BSTreeNode & other) = delete;
+    BSTreeNode & operator=(const BSTreeNode & other) = delete;
+    BSTreeNode(BSTreeNode && other) = delete;
+    BSTreeNode & operator=(BSTreeNode && other) = delete;
 };
 
 // insert
@@ -25,7 +39,8 @@ void insert(std::unique_ptr<BSTreeNode<Value>> & head, const Value & item) {
     // TODO
 }
 
-// tree_traversal
+// tree_traversal (inorder traversal)
+template<typename Value, typename FDIter>
 void tree_traversal() {
     // TODO
 }
@@ -46,7 +61,7 @@ void treesort(FDIter first, FDIter last)
 
     // Forward Iterator
     for (FDIter it = first; it != last; ++it) {
-        doSomething(*it); // DUMMY
+        // DUMMY
     }
 
     // Finding the Value Type
