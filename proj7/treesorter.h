@@ -13,7 +13,17 @@
 #include <iterator> // For std::iterator_traits
 #include <memory> // For std::unique_ptr
 
-// struct BSTreeNode
+
+// *********************************************************************
+// struct BSTreeNode - Struct definition
+// *********************************************************************
+
+
+// FIXME: BSTreeNode
+// Invariants:
+//     ???
+// Requirements on Types:
+//     ???
 template <typename Value>
 struct BSTreeNode {
     Value _data; // Data for this node.
@@ -23,7 +33,7 @@ struct BSTreeNode {
     std::unique_ptr<BSTreeNode> _right;
 
     // Ctor
-    explicit BSTreeNode(const Value & data):_data(data) {}
+    explicit BSTreeNode(const Value & data) : _data(data) {}
 
     // Dctor
     ~BSTreeNode() = default;
@@ -35,7 +45,13 @@ struct BSTreeNode {
     BSTreeNode & operator=(BSTreeNode && other) = delete;
 };
 
-// insert
+// FIXME: insert
+// Pre:
+//     ???
+// Requirements on Types:
+//     ???
+// Exception safety guarantee:
+//     ???
 template<typename Value>
 void insert(std::unique_ptr<BSTreeNode<Value>> & head, const Value & item) {
     // TODO
@@ -56,6 +72,12 @@ void insert(std::unique_ptr<BSTreeNode<Value>> & head, const Value & item) {
 }
 
 // tree_traversal (inorder traversal)
+// Pre:
+//     ???
+// Requirements on Types:
+//     ???
+// Exception safety guarantee:
+//     ???
 template<typename Value, typename FDIter>
 void tree_traversal() {
     // TODO
