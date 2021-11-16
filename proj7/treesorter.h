@@ -18,11 +18,12 @@
 // *********************************************************************
 
 
-// FIXME: BSTreeNode
+// FIXME: Struct BSTreeNode
 // Invariants:
-//     ???
+//     Either _left and _right is null or _left and _right points to an BSTreeNode (and thus
+//      _left and _right points to a null-ptr-terminated Linked List of BSTreeNode).
 // Requirements on Types:
-//     ???
+//     Value must have a copy ctor and a (non-throwing) dctor.
 template <typename Value>
 struct BSTreeNode {
     Value _data; // Data for this node.
@@ -48,11 +49,11 @@ struct BSTreeNode {
 
 // FIXME: insert
 // Pre:
-//     ???
+//  head is ptr to null - ptr - terminated Linked List, or is null.
 // Requirements on Types:
-//     ???
+//     Value must have a copy ctor and a (non-throwing) dctor.
 // Exception safety guarantee:
-//     ???
+//     No-Throw Guarantee
 template<typename Value>
 void insert(std::unique_ptr<BSTreeNode<Value>> & head, const Value & item) {
     if (head) {
@@ -65,13 +66,14 @@ void insert(std::unique_ptr<BSTreeNode<Value>> & head, const Value & item) {
         head = std::make_unique<BSTreeNode<Value>>(item);
 }
 
-// TODO: tree_traversal (inorder traversal)
+// FIXME: tree_traversal (inorder traversal)
 // Pre:
-//     ???
+//    head is ptr to null - ptr - terminated Linked List, or is null.
+//    iter is an iterator to a container.
 // Requirements on Types:
-//     ???
+//     Value must have a copy ctor and a (non-throwing) dctor.
 // Exception safety guarantee:
-//     ???
+//     No-Throw Guarantee
 template<typename Value, typename FDIter>
 void tree_traversal(std::unique_ptr<BSTreeNode<Value>> & head, FDIter & iter) {
     if (head) {
@@ -83,14 +85,15 @@ void tree_traversal(std::unique_ptr<BSTreeNode<Value>> & head, FDIter & iter) {
         return;
 }
 
-// TODO: treesort
+// FIXME: treesort
 // Sort a given range using Treesort.
 // Pre:
-//     ???
+//    first is the first iterator to a container.
+//    last is the last iterator to a container.
 // Requirements on Types:
-//     ???
+//    FDIter must be a pointer/iterator to the first element in a defined container.
 // Exception safety guarantee:
-//     ???
+//    Basic Guarantee
 template<typename FDIter>
 void treesort(FDIter first, FDIter last) {
     // Value is the type that FDIter points to
