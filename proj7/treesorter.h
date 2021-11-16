@@ -23,6 +23,20 @@ struct BSTreeNode {
 template<typename Value>
 void insert(std::unique_ptr<BSTreeNode<Value>> & head, const Value & item) {
     // TODO
+    while (head) // while head is not null compare item against root value
+    {
+    // check root against item
+    // root > item; go left
+    // (recurse)
+    // root < item; go right 
+    // (recurse)
+    // Set dummyptr = left node or right node based on results
+    // then recures based on the ptr to the next node
+    }
+    if (!head) {
+        //create node
+
+    }
 }
 
 // tree_traversal
