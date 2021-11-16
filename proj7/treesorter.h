@@ -16,9 +16,11 @@
 // struct BSTreeNode
 template <typename Value>
 struct BSTreeNode {
-    Value _data; // Data for this node
+    Value _data; // Data for this node.
 
-    // TODO: pointer left & right nodes
+    // Pointer to Left & Right Nodes
+    std::unique_ptr<BSTreeNode> _left;
+    std::unique_ptr<BSTreeNode> _right;
 
     // Ctor
     explicit BSTreeNode(const Value & data):_data(data) {}
