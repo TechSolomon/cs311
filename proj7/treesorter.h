@@ -28,9 +28,9 @@ template <typename Value>
 struct BSTreeNode {
     Value _data; // Data for this node.
 
-    // Pointer to Left & Right Nodes
-    std::unique_ptr<BSTreeNode> _left;
-    std::unique_ptr<BSTreeNode> _right;
+    // Pointer to Left & Right Nodes (nullptr -> empty case)
+    std::unique_ptr<BSTreeNode> _left = nullptr;
+    std::unique_ptr<BSTreeNode> _right = nullptr;
 
     // Ctor
     explicit BSTreeNode(const Value & data) : _data(data) {}
