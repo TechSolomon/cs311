@@ -58,15 +58,19 @@ void insert(std::unique_ptr<BSTreeNode<Value>> & head, const Value & item) {
     while (head) // while head is not null compare item against root value
     {
     // check root against item
-    // root > item; go left
-    // (recurse)
-    // root < item; go right 
-    // (recurse)
-    // Set dummyptr = left node or right node based on results
-    // then recures based on the ptr to the next node
+        if (head->_data > item) {
+            insert(head->_left, item); // root > item; go left
+    }
+        else if (head->_data < item) {
+            insert(head->_right, item); // root < item; go right
+        }
+        else if (head->_data = item) {
+            // not sure
+        }
+
     }
     if (!head) {
-        //create node
+        head->_data = item;
 
     }
 }
