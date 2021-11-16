@@ -60,16 +60,13 @@ void insert(std::unique_ptr<BSTreeNode<Value>> & head, const Value & item) {
     // check root against item
         if (head->_data > item) {
             insert(head->_left, item); // root > item; go left
-    }
+        }
         else if (head->_data < item) {
             insert(head->_right, item); // root < item; go right
         }
         else {
-            head->_data = item;
-            if (head->_data) {
                 insert(head->_left, item);  // FIXME: not sure about = case just doing this for now.
             }
-        }
 
     }
     if (!head) {
