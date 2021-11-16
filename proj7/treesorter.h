@@ -67,7 +67,6 @@ void insert(std::unique_ptr<BSTreeNode<Value>> & head, const Value & item) {
         else {
                 insert(head->_left, item);  // FIXME: not sure about = case just doing this for now.
             }
-
     }
     if (!head) {
         head->_data = item;
