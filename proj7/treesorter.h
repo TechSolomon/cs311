@@ -12,8 +12,6 @@
 
 #include <iterator> // For std::iterator_traits
 #include <memory> // For std::unique_ptr
-#include <ostream>
-
 // *********************************************************************
 // struct BSTreeNode - Struct definition
 // *********************************************************************
