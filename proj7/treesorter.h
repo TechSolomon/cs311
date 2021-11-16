@@ -10,10 +10,22 @@
 #ifndef FILE_TREESORTER_H_INCLUDED
 #define FILE_TREESORTER_H_INCLUDED
 
-#include <iterator>
-// For std::iterator_traits
+#include <iterator> // For std::iterator_traits
+#include <memory> // For std::unique_ptr
 
-// treesort
+// BSTreeNode
+template<typename Value>
+struct BSTreeNode {
+    // TODO
+};
+
+// insert
+template<typename Value>
+void insert(std::unique_ptr<BSTreeNode<Value>> & head, const Value & item) {
+    // TODO
+}
+
+// TODO: treesort
 // Sort a given range using Treesort.
 // Pre:
 //     ???
@@ -26,6 +38,17 @@ void treesort(FDIter first, FDIter last)
 {
     // Value is the type that FDIter points to
     using Value = typename std::iterator_traits<FDIter>::value_type;
+
+    // TODO: std::tuple
+
+    // Forward Iterator
+    for (FDIter it = first; it != last; ++it) {
+        doSomething(*it); // DUMMY
+    }
+
+    // Finding the Value Type
+
+    // FIXME: auto p = std::make_unique<BSTreeNode<<Value>>(...)
 }
 
 
