@@ -82,8 +82,18 @@ void insert(std::unique_ptr<BSTreeNode<Value>> & head, const Value & item) {
 // Exception safety guarantee:
 //     ???
 template<typename Value, typename FDIter>
-void tree_traversal() {
-    // DUMMY
+void tree_traversal(std::unique_ptr<BSTreeNode<Value>> & head, const FDIter & object) {
+    if (head) {
+        // TODO
+    }
+
+    if (head->_left) {
+        // TODO
+    }
+
+    if (head->_right) {
+        // TODO
+    }
 }
 
 // TODO: treesort
