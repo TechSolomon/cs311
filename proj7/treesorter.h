@@ -55,7 +55,7 @@ struct BSTreeNode {
 template<typename Value>
 void insert(std::unique_ptr<BSTreeNode<Value>> & head, const Value & item) {
     // TODO
-    while (head) // while head is not null compare item against root value
+    if (head) // while head is not null compare item against root value
     {
     // check root against item
         if (head->_data > item) {
@@ -68,9 +68,8 @@ void insert(std::unique_ptr<BSTreeNode<Value>> & head, const Value & item) {
                 insert(head->_left, item);  // FIXME: not sure about = case just doing this for now.
             }
     }
-    if (!head) {
+    else {
         head->_data = item;
-
     }
 }
 
