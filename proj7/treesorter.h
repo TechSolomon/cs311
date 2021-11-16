@@ -12,7 +12,7 @@
 
 #include <iterator> // For std::iterator_traits
 #include <memory> // For std::unique_ptr
-
+#include <ostream>
 
 // *********************************************************************
 // struct BSTreeNode - Struct definition
@@ -28,8 +28,10 @@ template <typename Value>
 struct BSTreeNode {
     Value _data; // Data for this node.
 
-    // Pointer to Left & Right Nodes (nullptr -> empty case)
+    // Pointer to Left Node (nullptr -> empty case)
     std::unique_ptr<BSTreeNode> _left = nullptr;
+
+    //Pointer to Right Nodes (nullptr -> empty case)
     std::unique_ptr<BSTreeNode> _right = nullptr;
 
     // Ctor
@@ -57,6 +59,7 @@ void insert(std::unique_ptr<BSTreeNode<Value>> & head, const Value & item) {
     // TODO
     if (head) // while head is not null compare item against root value
     {
+        //auto p = head.get();
     // check root against item
         if (head->_data > item) {
             insert(head->_left, item); // root > item; go left
@@ -81,7 +84,7 @@ void insert(std::unique_ptr<BSTreeNode<Value>> & head, const Value & item) {
 // Exception safety guarantee:
 //     ???
 template<typename Value, typename FDIter>
-void tree_traversal(std::unique_ptr<BSTreeNode<Value>> & head, const FDIter & iter) {
+void tree_traversal(std::unique_ptr<BSTreeNode<Value>> & head, FDIter & iter) {
     if(head){
 
             tree_traversal(head->_left, iter);
@@ -108,14 +111,16 @@ void treesort(FDIter first, FDIter last)
 {
     // Value is the type that FDIter points to
     using Value = typename std::iterator_traits<FDIter>::value_type;
+    //declare bst with Value
+   auto ptrBST = std::make_unique<BSTreeNode<Value>>(*first);
 
     // Forward Iterator
-    for (FDIter it = first; it != last; ++it) {
-        // DUMMY
+    for (FDIter it = first; it != last; ++it) 
+    {
+    //   insert(ptrBST, *it);
     }
+    tree_traversal(ptrBST, first);
 
-    // Finding the Value Type
-    // FIXME: auto p = std::make_unique<BSTreeNode<<Value>>(...)
 }
 
 
