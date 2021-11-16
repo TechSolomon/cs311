@@ -12,6 +12,7 @@
 
 #include <iterator> // For std::iterator_traits
 #include <memory> // For std::unique_ptr
+
 // *********************************************************************
 // struct BSTreeNode - Struct definition
 // *********************************************************************
@@ -26,10 +27,10 @@ template <typename Value>
 struct BSTreeNode {
     Value _data; // Data for this node.
 
-    // Pointer to Left Node (nullptr -> empty case)
+    // Pointer to Left Node
     std::unique_ptr<BSTreeNode<Value>> _left = nullptr;
 
-    //Pointer to Right Nodes (nullptr -> empty case)
+    // Pointer to Right Node
     std::unique_ptr<BSTreeNode<Value>> _right = nullptr;
 
     // Ctor
@@ -54,20 +55,14 @@ struct BSTreeNode {
 //     ???
 template<typename Value>
 void insert(std::unique_ptr<BSTreeNode<Value>> & head, const Value & item) {
-    // TODO
-    if (head) // while head is not null compare item against root value
-    {
-    // check root against item
-        if (item < head->_data) {
-            insert(head->_left, item); // root > item; go left
-        }
-        else{
-            insert(head->_right, item); // root < item; go right
-        }
+    if (head) {
+        if (item < head->_data)
+            insert(head->_left, item);
+        else
+            insert(head->_right, item);
     }
-    else {
+    else
         head = std::make_unique<BSTreeNode<Value>>(item);
-    }
 }
 
 // TODO: tree_traversal (inorder traversal)
@@ -79,17 +74,13 @@ void insert(std::unique_ptr<BSTreeNode<Value>> & head, const Value & item) {
 //     ???
 template<typename Value, typename FDIter>
 void tree_traversal(std::unique_ptr<BSTreeNode<Value>> & head, FDIter & iter) {
-    if(head){
-
-            tree_traversal(head->_left, iter);
-            *iter++ = head->_data;
-            tree_traversal(head->_right, iter);
+    if (head) {
+        tree_traversal(head->_left, iter);
+        *iter++ = head->_data;
+        tree_traversal(head->_right, iter);
     }
     else
-    {
         return;
-    }
-
 }
 
 // TODO: treesort
@@ -101,20 +92,18 @@ void tree_traversal(std::unique_ptr<BSTreeNode<Value>> & head, FDIter & iter) {
 // Exception safety guarantee:
 //     ???
 template<typename FDIter>
-void treesort(FDIter first, FDIter last)
-{
+void treesort(FDIter first, FDIter last) {
     // Value is the type that FDIter points to
     using Value = typename std::iterator_traits<FDIter>::value_type;
-    //declare bst with Value
-   auto ptrBST = std::make_unique<BSTreeNode<Value>>(*first);
+
+    // Declare Binary Search Tree (BST) with Value
+    std::unique_ptr<BSTreeNode<Value>> ptrBST;
 
     // Forward Iterator
-    for (FDIter it = first; it != last; ++it) 
-    {
-    insert(ptrBST, *it);
-    }
-    tree_traversal(ptrBST, first);
+    for (FDIter it = first; it != last; ++it)
+        insert(ptrBST, *it);
 
+    tree_traversal(ptrBST, first);
 }
 
 
