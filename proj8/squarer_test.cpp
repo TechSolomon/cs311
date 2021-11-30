@@ -43,10 +43,81 @@ const std::string test_suite_name =
 // *********************************************************************
 
 
-TEST_CASE("DUMMY")
+TEST_CASE("Squarer: Positive Ints")
+{
+    Squarer sq;
+    for (int range = 2; range < 100; ++range)
+    {
+        int result = range * range;
+        SUBCASE("Square " + range);
+        INFO(range <<" squared is " << result);
+        REQUIRE(sq(range) == result);
+    }
+}
+
+TEST_CASE("Squarer: Negative Ints")
+{
+    Squarer sq;
+    for (int range = -2; range > -100; --range)
+    {
+        int result = range * range;
+        SUBCASE("Square " + range);
+        INFO(range << " squared is " << result);
+        REQUIRE(sq(range) == result);
+    }
+}
+
+TEST_CASE("Squarer: Wide Positive Ints")
+{
+    //int value ~46340^2 is max int value
+    Squarer sq;
+    for (int range = 2; range < 46340; range+= 300)
+    {
+        int result = range * range;
+        SUBCASE("Square " + range);
+        INFO(range << " squared is " << result);
+        REQUIRE(sq(range) == result);
+    }
+}
+
+TEST_CASE("Squarer: Wide Negative Ints")
+{
+    //int value ~46340^2 is max int value
+    Squarer sq;
+    for (int range = -2; range > -46340; range -= 300)
+    {
+        int result = range * range;
+        SUBCASE("Square " + range);
+        INFO(range << " squared is " << result);
+        REQUIRE(sq(range) == result);
+    }
+}
+
+TEST_CASE("Squarer: Positive Floats")
 {
     // DUMMY TEST CASE; REWRITE THIS AND ADD MORE!!!
 }
+
+TEST_CASE("Squarer: Negative Floats")
+{
+    // DUMMY TEST CASE; REWRITE THIS AND ADD MORE!!!
+}
+
+TEST_CASE("Squarer: Wide Negative Floats")
+{
+    // DUMMY TEST CASE; REWRITE THIS AND ADD MORE!!!
+}
+
+TEST_CASE("Squarer: Wide Positive Floats")
+{
+    // DUMMY TEST CASE; REWRITE THIS AND ADD MORE!!!
+}
+
+TEST_CASE("Squarer: Special Cases  -1, 0, 1")
+{
+    // DUMMY TEST CASE; REWRITE THIS AND ADD MORE!!!
+}
+
 
 
 // *********************************************************************
