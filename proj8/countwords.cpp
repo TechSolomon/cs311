@@ -5,12 +5,11 @@
 // Source for Exercise A — Program: Counting Words.
 
 #include <iostream>
-
-// TODO: Store results (before printing) in an appropriate STL container.
-
-void count() {
-    std::cout << "Hello, Counting Words." << std::endl;
-}
+#include <iomanip>
+#include <map> // For std::map
+#include <string>
+#include <fstream>
+#include <sstream>
 
 // userPause
 // Wait for user to press ENTER: read all chars through first newline.
@@ -19,18 +18,29 @@ void userPause() {
     while (std::cin.get() != '\n');
 }
 
-int main() {
-    count();
+// FIXME: Edge cases to avoid all crashes:
+//  - For example, what if the user, when prompted for a filename, just hits ENTER?
+//  - What if they type a bunch of blanks and then hit ENTER?
+//  - What about a filename with a blank in the middle?
+//  - What about the name of a file that does not exist?
+//  - A file that exists but cannot be read?
+//  - An empty file?
+//  - An executable file? a directory?
 
-    // FIXME: Edge cases to avoid all crashes:
-    //  - For example, what if the user, when prompted for a filename, just hits ENTER?
-    //  - What if they type a bunch of blanks and then hit ENTER?
-    //  - What about a filename with a blank in the middle?
-    //  - What about the name of a file that does not exist?
-    //  - A file that exists but cannot be read?
-    //  - An empty file?
-    //  - An executable file? a directory?
-    //  - Etc.
+// Main program
+// Prompt for ENTER before exiting.
+int main(int argc, char *argv[]) {
+    int index = 0;
+
+    std::string file;
+
+    std::cout << "Enter your file name (followed by an ENTER): ";
+    std::getline(std::cin, file);
+
+    std::string stat;
+    std::map<std::string, int> statistics;
+
+    // FIXME: std::cout << "Number of distinct words: " << index << std::endl;
 
     // Wait for user
     std::cout << "Press ENTER to quit ";
