@@ -153,7 +153,7 @@ TEST_CASE("Squarer: Special Cases  -1, 0, 1")
 {
 	Squarer sq;
 	SUBCASE("Special Ints Squares") {
-	for (int square = 1; square != -1; --square)
+	for (int square = 1; square >= -1; --square)
 	{
 		int result = square * square;
 		
@@ -163,7 +163,7 @@ TEST_CASE("Squarer: Special Cases  -1, 0, 1")
 	}
 
 	SUBCASE("Special Float Squares") {
-	for (int square = 1; square != -1; --square)
+	for (int square = 1; square >= -1; --square)
 	{
 		auto floatSquare = float(square);
 		float result = floatSquare * floatSquare;
