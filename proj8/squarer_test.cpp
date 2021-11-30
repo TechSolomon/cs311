@@ -166,7 +166,6 @@ TEST_CASE("Squarer: Special Cases  -1, 0, 1")
 			REQUIRE(sq(floatSquare) == result);
 		}
 	}
-
 }
 
 
@@ -207,7 +206,7 @@ int main(int argc,
     // Handle command line
     dtcontext.applyCommandLine(argc, argv);
     dtresult = 0;            // doctest flags no command-line errors
-                             //  (sttest but true)
+                             //  (strange but true)
 
     if (!dtresult)           // Continue only if no command-line error
     {
