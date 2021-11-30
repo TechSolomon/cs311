@@ -95,12 +95,24 @@ TEST_CASE("Squarer: Wide Negative Ints")
 
 TEST_CASE("Squarer: Positive Floats")
 {
-    // DUMMY TEST CASE; REWRITE THIS AND ADD MORE!!!
+    Squarer sq;
+
+        float test = 1.1;
+        float result = 1.21;
+        SUBCASE("Square Positive Floats 1.1");
+        INFO(result << " squared is " << test);
+        REQUIRE(sq(test) == doctest::Approx(result));
 }
 
 TEST_CASE("Squarer: Negative Floats")
 {
-    // DUMMY TEST CASE; REWRITE THIS AND ADD MORE!!!
+    Squarer sq;
+
+    float test = -1.1;
+    float result = 1.21;
+    SUBCASE("Square Positive Floats -1.1");
+    INFO(result << " squared is " << test);
+    REQUIRE(sq(test) == doctest::Approx(result));
 }
 
 TEST_CASE("Squarer: Wide Negative Floats")
