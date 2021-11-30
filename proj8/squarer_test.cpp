@@ -110,19 +110,31 @@ TEST_CASE("Squarer: Negative Floats")
 
     float test = -1.1;
     float result = 1.21;
-    SUBCASE("Square Positive Floats -1.1");
+    SUBCASE("Square Negative Floats -1.1");
     INFO(result << " squared is " << test);
     REQUIRE(sq(test) == doctest::Approx(result));
 }
 
 TEST_CASE("Squarer: Wide Negative Floats")
 {
-    // DUMMY TEST CASE; REWRITE THIS AND ADD MORE!!!
+    Squarer sq;
+
+    float test = -13452.32;
+    float result = 180964913.382;
+    SUBCASE("Square Wide Negative Floats -13452.32");
+    INFO(result << " squared is " << test);
+    REQUIRE(sq(test) == doctest::Approx(result));
 }
 
 TEST_CASE("Squarer: Wide Positive Floats")
 {
-    // DUMMY TEST CASE; REWRITE THIS AND ADD MORE!!!
+    Squarer sq;
+
+    float test = 13452.32;
+    float result = 180964913.382;
+    SUBCASE("Square Wide Positive Floats 13452.32");
+    INFO(result << " squared is " << test);
+    REQUIRE(sq(test) == doctest::Approx(result));
 }
 
 TEST_CASE("Squarer: Special Cases  -1, 0, 1")
@@ -147,6 +159,15 @@ TEST_CASE("Squarer: Special Cases  -1, 0, 1")
 
 }
 
+//TODO
+TEST_CASE("Squarer: Const?") {
+   const Squarer sq;
+   int test = 3;
+   int result = 9;
+   SUBCASE("Const Squarer");
+   INFO(test << " squared is " << result);
+   REQUIRE(sq(test) == result);
+}
 
 
 // *********************************************************************
