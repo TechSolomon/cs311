@@ -50,7 +50,6 @@ TEST_CASE("Squarer: Positive Ints")
 	for (int test = 2; test < 100; ++test)
 	{
 		int result = test * test;
-		
 			INFO("+ Int: " << test << " squared is " << result);
 			REQUIRE(sq(test) == result);
 		}
@@ -64,7 +63,6 @@ TEST_CASE("Squarer: Negative Ints")
 	for (int test = -2; test > -100; --test)
 	{
 		int result = test * test;
-		
 			INFO("- Int: " << test << " squared is " << result);
 			REQUIRE(sq(test) == result);
 		}
@@ -79,7 +77,6 @@ TEST_CASE("Squarer: Wide Positive Ints")
 	for (int test = 2; test < 46340; test += 300)
 	{
 		int result = test * test;
-		
 			INFO("Wide + Int: " << test << " squared is " << result);
 			REQUIRE(sq(test) == result);
 		}
@@ -94,7 +91,6 @@ TEST_CASE("Squarer: Wide Negative Ints")
 	for (int test = -2; test > -46340; test -= 300)
 	{
 		int result = test * test;
-		
 			INFO("Wide - Int: " << test << " squared is " << result);
 			REQUIRE(sq(test) == result);
 		}
@@ -156,7 +152,6 @@ TEST_CASE("Squarer: Special Cases  -1, 0, 1")
 	for (int square = 1; square != -1; --square)
 	{
 		int result = square * square;
-		
 			INFO("Special Int: " << square << " squared is " << result);
 			REQUIRE(sq(square) == result);
 		}
@@ -167,7 +162,6 @@ TEST_CASE("Squarer: Special Cases  -1, 0, 1")
 	{
 		auto floatSquare = float(square);
 		float result = floatSquare * floatSquare;
-		
 			INFO("Special Float: " << floatSquare << " squared is " << result);
 			REQUIRE(sq(floatSquare) == result);
 		}
