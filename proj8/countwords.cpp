@@ -4,32 +4,22 @@
 // 2021-11-21
 // Source for Exercise A — Program: Counting Words.
 
-#include <iostream>
-#include <iomanip>
+#include <iostream> // For std::cerr
 #include <map> // For std::map
-#include <string>
-#include <fstream>
-#include <sstream>
+#include <fstream> // For std::ifstream
 
 // userPause
-// FIXME: Wait for user to press ENTER: read all chars through first newline.
+// Wait for user to press ENTER: read all chars through first newline.
 void userPause() {
     std::cout.flush();
     while (std::cin.get() != '\n');
 }
 
-// FIXME: Edge cases to avoid all crashes:
-//  - What if the user, when prompted for a filename, just hits ENTER?
-//  - What if they type a bunch of blanks and then hit ENTER?
-//  - What about a filename with a blank in the middle?
-//  - What about the name of a file that does not exist?
-//  - A file that exists but cannot be read?
-//  - An empty file?
-//  - An executable file? a directory?
-
 // Main program
-// FIXME: Prompt for ENTER before exiting.
-int main(int argc, char *argv[]) {
+// Prompt for ENTER before exiting.
+// Preconditions: None.
+// No-Throw Guarantee Guarantee
+int main([[maybe_unused]] int argc, [[maybe_unused]] char *argv[]) {
     int index = 1;
 
     std::string file;
@@ -73,5 +63,6 @@ int main(int argc, char *argv[]) {
 
     // Wait for user
     std::cout << "Press ENTER to quit ";
+    std::cout << std::endl;
     userPause();
 }
