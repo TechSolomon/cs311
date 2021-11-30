@@ -175,9 +175,10 @@ TEST_CASE("Squarer: Const Test") {
 	const Squarer sq;
 	const int test = 3;
 	const int result = 9;
-	SUBCASE("Const Squarer");
-	INFO(test << " squared is " << result);
-	REQUIRE(sq(test) == result);
+	SUBCASE("Const Squarer") {
+		INFO(test << " squared is " << result);
+		REQUIRE(sq(test) == result);
+	}
 }
 
 
