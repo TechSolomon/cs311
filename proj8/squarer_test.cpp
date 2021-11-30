@@ -71,7 +71,7 @@ TEST_CASE("Squarer: Negative Ints")
 
 TEST_CASE("Squarer: Wide Positive Ints")
 {
-	//int value ~46340^2 is max int value
+	// int value ~46340^2 is max int value
 	Squarer sq;
 	for (int test = 2; test < 46340; test += 300)
 	{
@@ -85,7 +85,7 @@ TEST_CASE("Squarer: Wide Positive Ints")
 
 TEST_CASE("Squarer: Wide Negative Ints")
 {
-	//int value ~46340^2 is max int value
+	// int value ~46340^2 is max int value
 	Squarer sq;
 	for (int test = -2; test > -46340; test -= 300)
 	{
