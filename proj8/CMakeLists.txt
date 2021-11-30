@@ -3,4 +3,4 @@ project(proj8)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(proj8 countwords.cpp)
+add_executable(proj8 squarer_test.cpp)
