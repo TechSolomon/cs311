@@ -115,7 +115,24 @@ TEST_CASE("Squarer: Wide Positive Floats")
 
 TEST_CASE("Squarer: Special Cases  -1, 0, 1")
 {
-    // DUMMY TEST CASE; REWRITE THIS AND ADD MORE!!!
+    Squarer sq;
+
+    for (int square = 1; square != -1; --square)
+    {
+           int result = square * square;
+           SUBCASE("Special Ints Squares");
+           INFO(square << " squared is " << result);
+           REQUIRE(sq(square) == result);
+    }
+
+    for (float square = 1; square != -1; --square)
+    {
+        float result = square * square;
+        SUBCASE("Special Float Squares");
+        INFO(square << " squared is " << result);
+        REQUIRE(sq(square) == result);
+    }
+
 }
 
 
