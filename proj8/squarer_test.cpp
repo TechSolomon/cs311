@@ -99,7 +99,7 @@ TEST_CASE("Squarer: Positive Floats")
 
 	float test = 1.1;
 	float result = 1.21;
-	SUBCASE("Square Positive Floats 1.1");
+	SUBCASE("Square Positive Floats 1.1")
 	INFO("+ Float: " << test << " squared is " << result);
 	REQUIRE(sq(test) == doctest::Approx(result));
 }
@@ -110,7 +110,7 @@ TEST_CASE("Squarer: Negative Floats")
 
 	float test = -1.1;
 	float result = 1.21;
-	SUBCASE("Square Negative Floats -1.1");
+	SUBCASE("Square Negative Floats -1.1")
 	INFO("- Float: " << test << " squared is " << result);
 	REQUIRE(sq(test) == doctest::Approx(result));
 }
@@ -121,7 +121,7 @@ TEST_CASE("Squarer: Wide Negative Floats")
 
 	float test = -13452.32;
 	float result = 180964913.382;
-	SUBCASE("Square Wide Negative Floats -13452.32");
+	SUBCASE("Square Wide Negative Floats -13452.32")
 	INFO("Wide - Float: " << test << " squared is " << result);
 	REQUIRE(sq(test) == doctest::Approx(result));
 }
@@ -132,7 +132,7 @@ TEST_CASE("Squarer: Wide Positive Floats")
 
 	float test = 13452.32;
 	float result = 180964913.382;
-	SUBCASE("Square Wide Positive Floats 13452.32");
+	SUBCASE("Square Wide Positive Floats 13452.32")
 	INFO("Wide + Float: " << test << " squared is " << result);
 	REQUIRE(sq(test) == doctest::Approx(result));
 }
@@ -144,16 +144,16 @@ TEST_CASE("Squarer: Special Cases  -1, 0, 1")
 	for (int square = 1; square != -1; --square)
 	{
 		int result = square * square;
-		SUBCASE("Special Ints Squares");
+		SUBCASE("Special Ints Squares")
 		INFO("Special Int: " << square << " squared is " << result);
 		REQUIRE(sq(square) == result);
 	}
 
 	for (int square = 1; square != -1; --square)
 	{
-		float floatSquare = float(square);
+		auto floatSquare = float(square);
 		float result = floatSquare * floatSquare;
-		SUBCASE("Special Float Squares");
+		SUBCASE("Special Float Squares")
 		INFO("Special Float: " << floatSquare << " squared is " << result);
 		REQUIRE(sq(floatSquare) == result);
 	}
@@ -165,7 +165,7 @@ TEST_CASE("Squarer: Const Test") {
 	const Squarer sq;
 	const int test = 3;
 	const int result = 9;
-	SUBCASE("Const Squarer");
+	SUBCASE("Const Squarer")
 	INFO(test << " squared is " << result);
 	REQUIRE(sq(test) == result);
 }
