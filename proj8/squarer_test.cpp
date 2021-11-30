@@ -160,7 +160,7 @@ TEST_CASE("Squarer: Special Cases  -1, 0, 1")
 
 	for (int square = 1; square != -1; --square)
 	{
-		float floatSquare = float(square);
+		auto floatSquare = float(square);
 		float result = floatSquare * floatSquare;
 		SUBCASE("Special Float Squares") {
 			INFO("Special Float: " << floatSquare << " squared is " << result);
@@ -175,10 +175,9 @@ TEST_CASE("Squarer: Const Test") {
 	const Squarer sq;
 	const int test = 3;
 	const int result = 9;
-	SUBCASE("Const Squarer") {
-		INFO(test << " squared is " << result);
-		REQUIRE(sq(test) == result);
-	}
+	SUBCASE("Const Squarer");
+	INFO(test << " squared is " << result);
+	REQUIRE(sq(test) == result);
 }
 
 
