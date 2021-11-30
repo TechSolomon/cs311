@@ -149,7 +149,7 @@ TEST_CASE("Squarer: Special Cases  -1, 0, 1")
            REQUIRE(sq(square) == result);
     }
 
-    for (float square = 1; square != -1; --square)
+    for (int square = 1; square != -1; --square)
     {
         float result = square * square;
         SUBCASE("Special Float Squares");
