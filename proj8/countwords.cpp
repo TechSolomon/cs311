@@ -36,11 +36,34 @@ int main(int argc, char *argv[]) {
 
     std::cout << "Enter your file name (followed by an ENTER): ";
     std::getline(std::cin, file);
+    std::ifstream infile(file);
 
     std::string stat;
     std::map<std::string, int> statistics;
 
-    // FIXME: std::cout << "Number of distinct words: " << index << std::endl;
+    if (infile.fail()) {
+        std::cerr << "ERROR: Could not find file!" << std::endl;
+    }
+
+    while (infile >> stat) {
+        if (!infile) {
+            if (statistics.count(stat) == 0) {
+                // DUMMY
+            }
+            else {
+                // DUMMY
+            }
+        }
+
+        // Check for an error on the last operation.
+        else if (infile.eof()) {
+            break;
+        }
+    }
+
+    // TODO: Output Statistics
+
+    // std::cout << "Number of distinct words: " << index << std::endl;
 
     // Wait for user
     std::cout << "Press ENTER to quit ";
