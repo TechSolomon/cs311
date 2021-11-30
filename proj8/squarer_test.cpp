@@ -162,8 +162,8 @@ TEST_CASE("Squarer: Special Cases  -1, 0, 1")
 //TODO
 TEST_CASE("Squarer: Const?") {
    const Squarer sq;
-   int test = 3;
-   int result = 9;
+   const int test = 3;
+   const int result = 9;
    SUBCASE("Const Squarer");
    INFO(test << " squared is " << result);
    REQUIRE(sq(test) == result);
