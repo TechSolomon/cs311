@@ -46,10 +46,11 @@ const std::string test_suite_name =
 TEST_CASE("Squarer: Positive Ints")
 {
 	Squarer sq;
+	SUBCASE("Square") {
 	for (int test = 2; test < 100; ++test)
 	{
 		int result = test * test;
-		SUBCASE("Square") {
+		
 			INFO("+ Int: " << test << " squared is " << result);
 			REQUIRE(sq(test) == result);
 		}
@@ -59,10 +60,11 @@ TEST_CASE("Squarer: Positive Ints")
 TEST_CASE("Squarer: Negative Ints")
 {
 	Squarer sq;
+	SUBCASE("Square") {
 	for (int test = -2; test > -100; --test)
 	{
 		int result = test * test;
-		SUBCASE("Square") {
+		
 			INFO("- Int: " << test << " squared is " << result);
 			REQUIRE(sq(test) == result);
 		}
@@ -73,10 +75,11 @@ TEST_CASE("Squarer: Wide Positive Ints")
 {
 	//int value ~46340^2 is max int value
 	Squarer sq;
+	SUBCASE("Square") {
 	for (int test = 2; test < 46340; test += 300)
 	{
 		int result = test * test;
-		SUBCASE("Square") {
+		
 			INFO("Wide + Int: " << test << " squared is " << result);
 			REQUIRE(sq(test) == result);
 		}
@@ -87,10 +90,11 @@ TEST_CASE("Squarer: Wide Negative Ints")
 {
 	//int value ~46340^2 is max int value
 	Squarer sq;
+	SUBCASE("Square") {
 	for (int test = -2; test > -46340; test -= 300)
 	{
 		int result = test * test;
-		SUBCASE("Square") {
+		
 			INFO("Wide - Int: " << test << " squared is " << result);
 			REQUIRE(sq(test) == result);
 		}
@@ -148,21 +152,22 @@ TEST_CASE("Squarer: Wide Positive Floats")
 TEST_CASE("Squarer: Special Cases  -1, 0, 1")
 {
 	Squarer sq;
-
+	SUBCASE("Special Ints Squares") {
 	for (int square = 1; square != -1; --square)
 	{
 		int result = square * square;
-		SUBCASE("Special Ints Squares") {
+		
 			INFO("Special Int: " << square << " squared is " << result);
 			REQUIRE(sq(square) == result);
 		}
 	}
 
+	SUBCASE("Special Float Squares") {
 	for (int square = 1; square != -1; --square)
 	{
 		auto floatSquare = float(square);
 		float result = floatSquare * floatSquare;
-		SUBCASE("Special Float Squares") {
+		
 			INFO("Special Float: " << floatSquare << " squared is " << result);
 			REQUIRE(sq(floatSquare) == result);
 		}
