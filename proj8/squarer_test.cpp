@@ -49,7 +49,7 @@ TEST_CASE("Squarer: Positive Ints")
 	for (int test = 2; test < 100; ++test)
 	{
 		int result = test * test;
-		SUBCASE("Square " + test) {
+		SUBCASE("Square") {
 			INFO("+ Int: " << test << " squared is " << result);
 			REQUIRE(sq(test) == result);
 		}
@@ -62,7 +62,7 @@ TEST_CASE("Squarer: Negative Ints")
 	for (int test = -2; test > -100; --test)
 	{
 		int result = test * test;
-		SUBCASE("Square " + test) {
+		SUBCASE("Square") {
 			INFO("- Int: " << test << " squared is " << result);
 			REQUIRE(sq(test) == result);
 		}
@@ -76,7 +76,7 @@ TEST_CASE("Squarer: Wide Positive Ints")
 	for (int test = 2; test < 46340; test += 300)
 	{
 		int result = test * test;
-		SUBCASE("Square " + test) {
+		SUBCASE("Square") {
 			INFO("Wide + Int: " << test << " squared is " << result);
 			REQUIRE(sq(test) == result);
 		}
@@ -90,7 +90,7 @@ TEST_CASE("Squarer: Wide Negative Ints")
 	for (int test = -2; test > -46340; test -= 300)
 	{
 		int result = test * test;
-		SUBCASE("Square " + test) {
+		SUBCASE("Square") {
 			INFO("Wide - Int: " << test << " squared is " << result);
 			REQUIRE(sq(test) == result);
 		}
